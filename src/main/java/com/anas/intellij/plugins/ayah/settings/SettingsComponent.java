@@ -65,19 +65,28 @@ public class SettingsComponent {
                 .getPanel();
 
         setup();
+        addListeners();
+        loadComboBoxesValues();
     }
 
     private void setup() {
         final var settings = AyahSettingsState.getInstance();
         notificationsIntervalSpinnerModel = new SpinnerNumberModel(settings.getIntervalTimeBetweenNotifications(),
                         1, Integer.MAX_VALUE, 1);
-        setupComboboxes(settings);
+
         notificationsIntervalSpinner.setModel(notificationsIntervalSpinnerModel);
         basmalhOnStartCheckBox.setSelected(settings.getBasmalhOnStart().isActive());
         autoPlayBasmalhCheckBox.setSelected(settings.getBasmalhOnStart().isSoundActive());
         autoPlayBasmalhCheckBox.setEnabled(settings.getBasmalhOnStart().isActive());
         notificationsAudioCheckBox.setSelected(settings.isAutoPlayAudio());
-        addListeners();
+        basmalhPlayerIdComboBox.setEnabled(settings.getBasmalhOnStart().isActive());
+
+        if (settings.getBasmalhOnStart().getPlayerId() != null) {
+            basmalhPlayerIdComboBox.setSelectedItem(settings.getBasmalhOnStart().getPlayerId());
+        }
+        if (settings.getPlayerId() != null) {
+            ayahPlayerIdComboBox.setSelectedItem(settings.getPlayerId());
+        }
     }
 
     private void addListeners() {
@@ -91,14 +100,7 @@ public class SettingsComponent {
                 ayahPlayerIdComboBox.setEnabled(notificationsAudioCheckBox.isSelected()));
     }
 
-    private void setupComboboxes(final AyahSettingsState settings) {
-        if (settings.getBasmalhOnStart().getPlayerId() != null) {
-            basmalhPlayerIdComboBox.setSelectedItem(settings.getBasmalhOnStart().getPlayerId());
-        }
-        if (settings.getPlayerId() != null) {
-            ayahPlayerIdComboBox.setSelectedItem(settings.getPlayerId());
-        }
-
+    private void loadComboBoxesValues() {
         try {
             final var editions = Edition.getEditions(EditionFormat.AUDIO);
             for (final var edition : editions) {
@@ -110,8 +112,6 @@ public class SettingsComponent {
             basmalhPlayerIdComboBox.addItem("Error can't get editions, please check internet connection");
             ayahPlayerIdComboBox.addItem("Error can't get editions, please check internet connection");
         }
-
-        basmalhPlayerIdComboBox.setEnabled(settings.getBasmalhOnStart().isActive());
     }
 
     public boolean isModified() {
