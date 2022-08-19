@@ -27,6 +27,7 @@
 	<extensions defaultExtensionNs="com.intellij">
 
 		<postStartupActivity implementation="com.anas.intellij.plugins.ayah.AyahStartupActivity" />
+		<preloadingActivity implementation="com.anas.intellij.plugins.ayah.AyahPreLoadingActivity"/>
 
 		<applicationConfigurable parentId="Other Settings"
 		                         instance="com.anas.intellij.plugins.ayah.settings.AyahSettingsConfigurable"
@@ -36,5 +37,6 @@
 
 		<notificationGroup id="Random ayah from the quran" displayType="BALLOON" />
 		<notificationGroup displayType="BALLOON" id="Basmalh on Start" />
+		<notificationGroup displayType="BALLOON" id="Random Ayah Notification" />
 	</extensions>
 </idea-plugin>

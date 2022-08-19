@@ -19,6 +19,7 @@ public class AyahStartupActivity implements StartupActivity {
     @Override
     public void runActivity(@NotNull final Project project) {
         final var basmalhOnStartSettingsState = AyahSettingsState.getInstance().getBasmalhOnStart();
+        // Basmalh on start
         if (basmalhOnStartSettingsState.isActive()) {
             try {
                 final var bassmalh = Ayah.getAyah(1,
@@ -34,5 +35,7 @@ public class AyahStartupActivity implements StartupActivity {
                 e.printStackTrace();
             }
         }
+        // Start notification timer.
+        NotificationTimer.INSTANCE.start(project);
     }
 }

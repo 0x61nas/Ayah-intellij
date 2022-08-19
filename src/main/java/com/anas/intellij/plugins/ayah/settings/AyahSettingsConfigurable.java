@@ -1,7 +1,7 @@
 package com.anas.intellij.plugins.ayah.settings;
 
+import com.anas.intellij.plugins.ayah.NotificationTimer;
 import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,6 +40,13 @@ public class AyahSettingsConfigurable implements Configurable {
         settingsState.setAutoPlayAudio(settingsComponent.isAutoPlayAudio());
         settingsState.setPlayerId(settingsComponent.getPlayerId());
         settingsState.setVolume(settingsComponent.getVolume());
+
+        // Update the timer with the new interval time between notifications if interval time between notifications has changed
+        if (settingsState.getIntervalTimeBetweenNotifications() !=
+                settingsComponent.getIntervalTimeBetweenNotifications()) {
+            NotificationTimer.INSTANCE
+                    .updateIntervalTimeBetweenNotifications(settingsState.getIntervalTimeBetweenNotifications());
+        }
     }
 
     @Override

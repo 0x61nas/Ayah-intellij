@@ -62,7 +62,7 @@ public class AyahSettingsState implements PersistentStateComponent<AyahSettingsS
         this.basmalhOnStart = basmalhOnStart;
     }
 
-    public long getIntervalTimeBetweenNotifications() {
+    public int getIntervalTimeBetweenNotifications() {
         return intervalTimeBetweenNotifications;
     }
 
