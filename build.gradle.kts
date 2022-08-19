@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
     implementation("com.github.anas-elgarhy:alquran-cloud-api:0.4.0-v1")
-    implementation("org.projectlombok:lombok:1.18.24")
+    implementation("com.miglayout:miglayout-swing:11.0")
 }
 
 // Configure Gradle IntelliJ Plugin

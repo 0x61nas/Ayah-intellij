@@ -34,6 +34,6 @@
 		                         displayName="Ayah Plugin Settings" />
 		<applicationService serviceImplementation="com.anas.intellij.plugins.ayah.settings.AyahSettingsState" />
 
-		<notificationGroup id="com.anas.intellij.plugins.ayah.notificationGroup" displayType="BALLOON" />
+		<notificationGroup id="Random ayah from the quran" displayType="BALLOON" />
 	</extensions>
 </idea-plugin>

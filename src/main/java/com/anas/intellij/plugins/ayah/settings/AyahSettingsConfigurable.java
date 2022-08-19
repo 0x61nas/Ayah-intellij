@@ -13,6 +13,8 @@ import javax.swing.*;
  */
 public class AyahSettingsConfigurable implements Configurable {
 
+    private SettingsComponent settingsComponent;
+
     @Nls(capitalization = Nls.Capitalization.Title)
     @Override
     public String getDisplayName() {
@@ -21,16 +23,27 @@ public class AyahSettingsConfigurable implements Configurable {
 
     @Override
     public @Nullable JComponent createComponent() {
-        return null;
+        settingsComponent = new SettingsComponent();
+        return settingsComponent.getPanel();
     }
 
     @Override
     public boolean isModified() {
-        return false;
+        return settingsComponent.isModified();
     }
 
     @Override
     public void apply() throws ConfigurationException {
 
+    }
+
+    @Override
+    public void reset() {
+        settingsComponent.reset();
+    }
+
+    @Override
+    public void disposeUIResources() {
+        settingsComponent = null;
     }
 }

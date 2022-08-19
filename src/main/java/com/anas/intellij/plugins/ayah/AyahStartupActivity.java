@@ -15,9 +15,7 @@ import java.io.IOException;
  */
 public class AyahStartupActivity implements StartupActivity {
     @Override
-    public void runActivity(@NotNull Project project) {
-        System.out.println("Hello World");
-
+    public void runActivity(@NotNull final Project project) {
 //        Messages.showDialog(project, "Hi yoo", "My First Message Yooo", new String[]{"Ok"}, 0, Messages.getInformationIcon());
 /*
         new Notification("com.anas.intellij.plugins.ayah.notificationGroup", "My First Notification",
@@ -26,7 +24,7 @@ public class AyahStartupActivity implements StartupActivity {
         try {
             final var rAyah = Ayah.getRandomAyah();
             NotificationGroupManager.getInstance()
-                    .getNotificationGroup("com.anas.intellij.plugins.ayah.notificationGroup")
+                    .getNotificationGroup("Random ayah from the quran")
                     .createNotification(rAyah.getSurah().getName(),
                             rAyah.getText(), NotificationType.INFORMATION).notify(project);
         } catch (final IOException e) {
