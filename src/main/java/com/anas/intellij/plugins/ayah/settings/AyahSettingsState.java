@@ -1,5 +1,7 @@
 package com.anas.intellij.plugins.ayah.settings;
 
+import com.anas.alqurancloudapi.edition.Edition;
+import com.anas.alqurancloudapi.edition.EditionFormat;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
@@ -7,6 +9,8 @@ import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
 
 /**
  * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
@@ -21,6 +25,7 @@ public class AyahSettingsState implements PersistentStateComponent<AyahSettingsS
     private int intervalTimeBetweenNotifications; // in minutes
     private boolean autoPlayAudio;
     private String playerId;
+    private int volume;
 
     public static AyahSettingsState getInstance() {
         return ApplicationManager.getApplication().getService(AyahSettingsState.class);
@@ -30,7 +35,12 @@ public class AyahSettingsState implements PersistentStateComponent<AyahSettingsS
         basmalhOnStart = new BasmalhOnStart();
         intervalTimeBetweenNotifications = 30; // 30 minutes
         autoPlayAudio = false;
-        playerId = null;
+        try {
+            playerId = Edition.getRandomEdition(EditionFormat.AUDIO, "ar").getIdentifier();
+        } catch (final IOException e) {
+            playerId = null;
+        }
+        volume = 40; // 40%
     }
 
 
@@ -76,4 +86,11 @@ public class AyahSettingsState implements PersistentStateComponent<AyahSettingsS
         this.playerId = playerId;
     }
 
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(final int volume) {
+        this.volume = volume;
+    }
 }

@@ -1,6 +1,8 @@
 package com.anas.intellij.plugins.ayah;
 
 import com.anas.alqurancloudapi.Ayah;
+import com.anas.intellij.plugins.ayah.audio.AudioPlayer;
+import com.anas.intellij.plugins.ayah.settings.AyahSettingsState;
 import com.intellij.notification.NotificationGroupManager;
 import com.intellij.notification.NotificationType;
 import com.intellij.openapi.project.Project;
@@ -16,19 +18,21 @@ import java.io.IOException;
 public class AyahStartupActivity implements StartupActivity {
     @Override
     public void runActivity(@NotNull final Project project) {
-//        Messages.showDialog(project, "Hi yoo", "My First Message Yooo", new String[]{"Ok"}, 0, Messages.getInformationIcon());
-/*
-        new Notification("com.anas.intellij.plugins.ayah.notificationGroup", "My First Notification",
-                "My First Notification", NotificationType.INFORMATION).notify(project);
-*/
-        try {
-            final var rAyah = Ayah.getRandomAyah();
-            NotificationGroupManager.getInstance()
-                    .getNotificationGroup("Random ayah from the quran")
-                    .createNotification(rAyah.getSurah().getName(),
-                            rAyah.getText(), NotificationType.INFORMATION).notify(project);
-        } catch (final IOException e) {
-            e.printStackTrace();
+        final var basmalhOnStartSettingsState = AyahSettingsState.getInstance().getBasmalhOnStart();
+        if (basmalhOnStartSettingsState.isActive()) {
+            try {
+                final var bassmalh = Ayah.getAyah(1,
+                        basmalhOnStartSettingsState.getPlayerId());
+                NotificationGroupManager.getInstance()
+                        .getNotificationGroup("Basmalh on Start")
+                        .createNotification(bassmalh.getText(), NotificationType.INFORMATION).notify(project);
+
+                if (basmalhOnStartSettingsState.isSoundActive()) {
+                    new AudioPlayer(basmalhOnStartSettingsState.getVolume(), bassmalh.getAudioUrl()).play();
+                }
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -39,6 +39,7 @@ public class AyahSettingsConfigurable implements Configurable {
         settingsState.setIntervalTimeBetweenNotifications(settingsComponent.getIntervalTimeBetweenNotifications());
         settingsState.setAutoPlayAudio(settingsComponent.isAutoPlayAudio());
         settingsState.setPlayerId(settingsComponent.getPlayerId());
+        settingsState.setVolume(settingsComponent.getVolume());
     }
 
     @Override

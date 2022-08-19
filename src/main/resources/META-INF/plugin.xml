@@ -35,5 +35,6 @@
 		<applicationService serviceImplementation="com.anas.intellij.plugins.ayah.settings.AyahSettingsState" />
 
 		<notificationGroup id="Random ayah from the quran" displayType="BALLOON" />
+		<notificationGroup displayType="BALLOON" id="Basmalh on Start" />
 	</extensions>
 </idea-plugin>

@@ -5,6 +5,7 @@ import com.anas.alqurancloudapi.edition.Edition;
 import com.anas.alqurancloudapi.edition.EditionFormat;
 import com.intellij.ui.components.JBCheckBox;
 import com.intellij.ui.components.JBLabel;
+import com.intellij.ui.components.JBSlider;
 import com.intellij.util.ui.FormBuilder;
 import net.miginfocom.swing.MigLayout;
 
@@ -23,18 +24,22 @@ public class SettingsComponent {
     private final JBCheckBox basmalhOnStartCheckBox;
     private final JBCheckBox autoPlayBasmalhCheckBox;
     private final JComboBox<String> basmalhPlayerIdComboBox;
+    private final JBSlider basmalhVolumeSlider;
     private final JSpinner notificationsIntervalSpinner;
     private SpinnerNumberModel notificationsIntervalSpinnerModel;
     private final JBCheckBox notificationsAudioCheckBox;
     private final JComboBox<String> ayahPlayerIdComboBox;
+    private final JBSlider ayahVolumeSlider;
 
     {
         basmalhOnStartCheckBox = new JBCheckBox("Basmalh on start");
         autoPlayBasmalhCheckBox = new JBCheckBox("Auto play basmalh audio");
         basmalhPlayerIdComboBox = new JComboBox<>();
+        basmalhVolumeSlider = new JBSlider();
         notificationsIntervalSpinner = new JSpinner();
         notificationsAudioCheckBox = new JBCheckBox("Notifications audio");
         ayahPlayerIdComboBox = new JComboBox<>();
+        ayahVolumeSlider = new JBSlider();
     }
 
     public SettingsComponent() {
@@ -51,6 +56,9 @@ public class SettingsComponent {
                                                 "gap unrelated")
                                         .addComponent(basmalhPlayerIdComboBox,
                                                 "grow, wrap")
+                                        .addComponent(new JBLabel("Volume"),
+                                                "gap 1")
+                                        .addComponent(basmalhVolumeSlider, "grow, wrap")
                                         .build(),
                                 "span, grow, wrap"
                         )
@@ -61,6 +69,8 @@ public class SettingsComponent {
                         .addComponent(notificationsAudioCheckBox, "grow")
                         .addComponent(new JBLabel("Ayah player"), "gap unrelated")
                         .addComponent(ayahPlayerIdComboBox, "grow, wrap")
+                        .addComponent(new JBLabel("Volume"), "gap unrelated")
+                        .addComponent(ayahVolumeSlider, "grow, wrap")
                         .build()
                 )
                 .getPanel();
@@ -81,6 +91,17 @@ public class SettingsComponent {
         autoPlayBasmalhCheckBox.setEnabled(settings.getBasmalhOnStart().isActive());
         notificationsAudioCheckBox.setSelected(settings.isAutoPlayAudio());
         basmalhPlayerIdComboBox.setEnabled(settings.getBasmalhOnStart().isActive());
+
+        basmalhVolumeSlider.setValue(settings.getBasmalhOnStart().getVolume());
+        basmalhVolumeSlider.setPaintLabels(true);
+        basmalhVolumeSlider.setPaintTicks(true);
+        basmalhVolumeSlider.setMajorTickSpacing(20);
+        basmalhVolumeSlider.setMinorTickSpacing(10);
+        ayahVolumeSlider.setValue(settings.getVolume());
+        ayahVolumeSlider.setPaintLabels(true);
+        ayahVolumeSlider.setPaintTicks(true);
+        ayahVolumeSlider.setMajorTickSpacing(20);
+        ayahVolumeSlider.setMinorTickSpacing(10);
 
         if (settings.getBasmalhOnStart().getPlayerId() != null) {
             basmalhPlayerIdComboBox.setSelectedItem(settings.getBasmalhOnStart().getPlayerId());
@@ -124,7 +145,9 @@ public class SettingsComponent {
                 settings.getIntervalTimeBetweenNotifications() != notificationsIntervalSpinnerModel.getNumber().intValue() ||
                 settings.getBasmalhOnStart().isActive() != basmalhOnStartCheckBox.isSelected() ||
                 settings.getBasmalhOnStart().isSoundActive() != autoPlayBasmalhCheckBox.isSelected() ||
-                settings.isAutoPlayAudio() != notificationsAudioCheckBox.isSelected();
+                settings.isAutoPlayAudio() != notificationsAudioCheckBox.isSelected() ||
+                settings.getBasmalhOnStart().getVolume() != basmalhVolumeSlider.getValue() ||
+                settings.getVolume() != ayahVolumeSlider.getValue();
     }
 
     public void reset() {
@@ -140,6 +163,7 @@ public class SettingsComponent {
         b.setActive(basmalhOnStartCheckBox.isSelected());
         b.setSoundActive(autoPlayBasmalhCheckBox.isSelected());
         b.setPlayerId(Objects.requireNonNull(basmalhPlayerIdComboBox.getSelectedItem()).toString());
+        b.setVolume(basmalhVolumeSlider.getValue());
         return b;
     }
 
@@ -153,5 +177,9 @@ public class SettingsComponent {
 
     public String getPlayerId() {
         return Objects.requireNonNull(ayahPlayerIdComboBox.getSelectedItem()).toString();
+    }
+
+    public int getVolume() {
+        return ayahVolumeSlider.getValue();
     }
 }
