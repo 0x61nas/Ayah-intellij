@@ -10,6 +10,7 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * The settings UI.
@@ -132,5 +133,25 @@ public class SettingsComponent {
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public BasmalhOnStart getBasmalhOnStart() {
+        final var b = new BasmalhOnStart();
+        b.setActive(basmalhOnStartCheckBox.isSelected());
+        b.setSoundActive(autoPlayBasmalhCheckBox.isSelected());
+        b.setPlayerId(Objects.requireNonNull(basmalhPlayerIdComboBox.getSelectedItem()).toString());
+        return b;
+    }
+
+    public int getIntervalTimeBetweenNotifications() {
+        return notificationsIntervalSpinnerModel.getNumber().intValue();
+    }
+
+    public boolean isAutoPlayAudio() {
+        return notificationsAudioCheckBox.isSelected();
+    }
+
+    public String getPlayerId() {
+        return Objects.requireNonNull(ayahPlayerIdComboBox.getSelectedItem()).toString();
     }
 }

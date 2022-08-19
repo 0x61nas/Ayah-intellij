@@ -33,8 +33,12 @@ public class AyahSettingsConfigurable implements Configurable {
     }
 
     @Override
-    public void apply() throws ConfigurationException {
-
+    public void apply() {
+        final var settingsState = AyahSettingsState.getInstance();
+        settingsState.setBasmalhOnStart(settingsComponent.getBasmalhOnStart());
+        settingsState.setIntervalTimeBetweenNotifications(settingsComponent.getIntervalTimeBetweenNotifications());
+        settingsState.setAutoPlayAudio(settingsComponent.isAutoPlayAudio());
+        settingsState.setPlayerId(settingsComponent.getPlayerId());
     }
 
     @Override
