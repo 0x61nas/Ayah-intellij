@@ -1,11 +1,11 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
 	<!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-	<id>com.example.ayah-intellij</id>
+	<id>com.anas.intellij.plugins.ayah</id>
 
 	<!-- Public plugin name should be written in Title Case.
 		 Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-	<name>Ayah-intellij</name>
+	<name>Ayah</name>
 
 	<!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
 	<vendor email="support@yourcompany.com" url="https://www.yourcompany.com">YourCompany</vendor>
@@ -26,5 +26,14 @@
 		 Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
 	<extensions defaultExtensionNs="com.intellij">
 
+		<postStartupActivity implementation="com.anas.intellij.plugins.ayah.AyahStartupActivity" />
+
+		<applicationConfigurable parentId="Other Settings"
+		                         instance="com.anas.intellij.plugins.ayah.settings.AyahSettingsConfigurable"
+		                         id="com.anas.intellij.plugins.ayah.settings.AyahSettingsConfigurable"
+		                         displayName="Ayah Plugin Settings" />
+		<applicationService serviceImplementation="com.anas.intellij.plugins.ayah.settings.AyahSettingsState" />
+
+		<notificationGroup id="com.anas.intellij.plugins.ayah.notificationGroup" displayType="BALLOON" />
 	</extensions>
 </idea-plugin>
