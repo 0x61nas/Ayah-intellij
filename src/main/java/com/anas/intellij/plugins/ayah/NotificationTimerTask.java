@@ -10,8 +10,11 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.util.TimerTask;
+import java.util.logging.Logger;
 
 /**
  * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
@@ -19,6 +22,8 @@ import java.util.TimerTask;
  */
 public class NotificationTimerTask extends TimerTask {
     private Project project;
+    private static final Logger LOGGER = Logger.getLogger(NotificationTimerTask.class.getName());
+
     @Override
     public void run() {
         final var settings = AyahSettingsState.getInstance();
@@ -30,10 +35,27 @@ public class NotificationTimerTask extends TimerTask {
             final var notification = new Notification("Random Ayah Notification",
                     randomAyah.getSurah().getName(),  randomAyah.getText(), NotificationType.INFORMATION);
 
-            notification.addAction(new AnAction() {
+            notification.addAction(new AnAction("Play") {
                 @Override
-                public void actionPerformed(@NotNull AnActionEvent e) {
-                    System.out.println("Action performed");
+                public void actionPerformed(@NotNull final AnActionEvent e) {
+                    LOGGER.info("Play action performed");
+                    new AudioPlayer(settings.getVolume(), randomAyah.getAudioUrl()).play();
+                }
+            });
+
+            notification.addAction(new AnAction("Copy") {
+                @Override
+                public void actionPerformed(@NotNull final AnActionEvent e) {
+                    LOGGER.info("Copy action performed");
+                    final var clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                    clipboard.setContents(new StringSelection(randomAyah.getText()), null);
+                }
+            });
+
+            notification.addAction(new AnAction("Details") {
+                @Override
+                public void actionPerformed(@NotNull final AnActionEvent e) {
+                    LOGGER.info("Details action performed");
                 }
             });
 
@@ -42,11 +64,12 @@ public class NotificationTimerTask extends TimerTask {
 
             // Play sound if enabled.
             if (settings.isAutoPlayAudio()) {
+                LOGGER.info("Playing ayah");
                 new AudioPlayer(settings.getVolume(), randomAyah.getAudioUrl()).play();
             }
 
         } catch (final IOException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }
     }
 
