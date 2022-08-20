@@ -1,62 +1,56 @@
 package com.anas.intellij.plugins.ayah.dialogs;
 
 import com.anas.alqurancloudapi.Ayah;
-import com.anas.intellij.plugins.ayah.settings.PanelBuilder;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.ui.components.JBLabel;
-import com.intellij.ui.components.JBTextArea;
-import net.miginfocom.swing.MigLayout;
-import org.jetbrains.annotations.Nullable;
+import com.anas.intellij.plugins.ayah.audio.AudioPlayer;
+import com.anas.intellij.plugins.ayah.settings.AyahSettingsState;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-/**
- * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
- * @date: 8/20/22
- */
-public class AyahDetailsDialog extends DialogWrapper {
-    private final JBTextArea ayahTextArea;
-    private JBLabel surahNameLabel;
-    private JBLabel numberOfAyahInSurahLabel;
-    private JBLabel tanzelLabel;
-    private final JButton playButton;
+public class AyahDetailsDialog extends JDialog {
+    private JPanel contentPane;
+    private JButton playButton;
+    private JButton buttonCancel;
+    private JTextArea ayahTextArea;
+    private JLabel surahNameLabel;
+    private JLabel numberOfAyahInSuarhLabel;
+    private JLabel ayahRevelationType;
 
-    {
-        ayahTextArea = new JBTextArea();
-        playButton = new JButton("Play");
-    }
-    public AyahDetailsDialog(final Project project, final Ayah ayah) {
-        super(project, false);
-        setTitle("Ayah Details");
-        initializeDataFiles(ayah);
+    public AyahDetailsDialog(final Ayah ayah) {
+        setContentPane(contentPane);
+        setModal(true);
         setSize(500, 300);
-        setModal(false);
-        setOKButtonText("");
-        init();
-    }
+        setResizable(false);
+        setLocationRelativeTo(null);
+        getRootPane().setDefaultButton(playButton);
 
-    private void initializeDataFiles(final Ayah ayah) {
         ayahTextArea.setText(ayah.getText());
-        ayahTextArea.setEditable(false);
+        surahNameLabel.setText(ayah.getSurah().getName());
+        numberOfAyahInSuarhLabel.setText("Number: " + ayah.getNumberInSurah());
+        ayahRevelationType.setText(ayah.getSurah().getRevelationType().getArabicName());
 
-        final var surah = ayah.getSurah();
-        surahNameLabel = new JBLabel(surah.getName());
-        tanzelLabel = new JBLabel(surah.getRevelationType().getArabicName() + " " + surah.getRevelationType().toString());
-
-        numberOfAyahInSurahLabel = new JBLabel("Number: " + ayah.getNumberInSurah());
-
+        addListeners(ayah);
     }
 
-    @Override
-    protected @Nullable JComponent createCenterPanel() {
-        return new PanelBuilder()
-                .setLayout(new MigLayout("fill"))
-                .addComponent(ayahTextArea, "grow, push, span")
-                .addComponent(surahNameLabel, "grow, push")
-                .addComponent(numberOfAyahInSurahLabel, "grow, push")
-                .addComponent(tanzelLabel, "grow, push, wrap")
-                .addComponent(playButton, "grow, push")
-                .build();
+    private void addListeners(final Ayah ayah) {
+        playButton.addActionListener(e ->
+                new AudioPlayer(AyahSettingsState.getInstance().getVolume(), ayah.getAudioUrl()).play());
+
+        buttonCancel.addActionListener(l -> dispose());
+
+        // call onCancel() when cross is clicked
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+
+        // call onCancel() on ESCAPE
+        contentPane.registerKeyboardAction(l -> dispose(),
+                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 }

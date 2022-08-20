@@ -3,7 +3,6 @@ package com.anas.intellij.plugins.ayah;
 import com.anas.alqurancloudapi.Ayah;
 import com.anas.intellij.plugins.ayah.audio.AudioPlayer;
 import com.anas.intellij.plugins.ayah.dialogs.AyahDetailsDialog;
-import com.anas.intellij.plugins.ayah.dialogs.AyahDialog;
 import com.anas.intellij.plugins.ayah.settings.AyahSettingsState;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
@@ -64,7 +63,7 @@ public class NotificationTimerTask extends TimerTask {
                 @Override
                 public void actionPerformed(@NotNull final AnActionEvent e) {
                     LOGGER.info("Details action performed");
-                    new AyahDialog(randomAyah).setVisible(true);
+                    new AyahDetailsDialog(randomAyah).setVisible(true);
                 }
             });
 
