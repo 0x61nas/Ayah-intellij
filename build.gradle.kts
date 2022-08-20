@@ -1,10 +1,10 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.6.0"
+    id("org.jetbrains.intellij") version "1.8.0"
 }
 
 group = "com.anas.intellij.plugins.ayah"
-version = "0.0.1"
+version = "0.0.2"
 
 repositories {
     mavenCentral()
@@ -24,8 +24,9 @@ java {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2021.3")
+    version.set("2022.2")
     type.set("IC") // Target IDE Platform
+    downloadSources.set(true)
 
     plugins.set(listOf(/* Plugin Dependencies */))
 }
@@ -38,8 +39,8 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("213")
-        untilBuild.set("223.*")
+        sinceBuild.set("222")
+        untilBuild.set("222.*")
     }
 
     signPlugin {

@@ -1,1 +1,1 @@
-rootProject.name = "ayah-intellij"
+rootProject.name = "Ayah-intellij"
