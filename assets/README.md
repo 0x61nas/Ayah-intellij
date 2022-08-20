@@ -3,7 +3,7 @@
 - [YosefJoo][yosefjoo] for design the icon 🤍
 - [MohamedRagab2002][mohamedragab] for premium cava account 😍
 
-[icon]: https://www.canva.com/learn/wp-content/uploads/sites/5/2016/01/icon-canva.png
+[icon]: https://www.canva.com/design/DAFJ2lUzx0U/YYVmCjU1G3EJY3a5Ut_1DA/edit?utm_content=DAFJ2lUzx0U&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 [yosefjoo]: https://github.com/YosefJoo
 [mohamedragab]: https://github.com/MohamedRagab2002
 

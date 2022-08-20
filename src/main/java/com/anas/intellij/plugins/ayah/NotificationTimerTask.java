@@ -62,6 +62,7 @@ public class NotificationTimerTask extends TimerTask {
                 @Override
                 public void actionPerformed(@NotNull final AnActionEvent e) {
                     LOGGER.info("Details action performed");
+                    new AyahDetailsDialog(project, randomAyah).show();
                 }
             });
 
