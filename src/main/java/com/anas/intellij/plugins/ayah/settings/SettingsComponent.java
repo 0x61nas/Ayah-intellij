@@ -87,7 +87,7 @@ public class SettingsComponent {
     private void setup() {
         final var settings = AyahSettingsState.getInstance();
         notificationsIntervalSpinnerModel = new SpinnerNumberModel(settings.getIntervalTimeBetweenNotifications(),
-                        1, Integer.MAX_VALUE, 1);
+                1, Integer.MAX_VALUE, 1);
 
         notificationsIntervalSpinner.setModel(notificationsIntervalSpinnerModel);
         basmalhOnStartCheckBox.setSelected(settings.getBasmalhOnStart().isActive());
@@ -166,7 +166,8 @@ public class SettingsComponent {
         final var b = new BasmalhOnStart();
         b.setActive(basmalhOnStartCheckBox.isSelected());
         b.setSoundActive(autoPlayBasmalhCheckBox.isSelected());
-        b.setEditionId(((ReadableEdition) Objects.requireNonNull(basmalhPlayerIdComboBox.getSelectedItem())).getEdition().getIdentifier());
+        b.setEditionId(((ReadableEdition) Objects.requireNonNull(
+                basmalhPlayerIdComboBox.getSelectedItem())).getEdition().getIdentifier());
         b.setVolume(basmalhVolumeSlider.getValue());
         return b;
     }
