@@ -17,12 +17,13 @@ import java.util.logging.Logger;
 public class AudioPlayer {
     private final StreamPlayer streamPlayer;
     private final String audioUrl;
+    private final float volume;
     private static final Logger LOGGER = Logger.getLogger(AudioPlayer.class.getName());
 
     public AudioPlayer(final int volume, final String audioUrl) {
         streamPlayer = new StreamPlayer();
         this.audioUrl = audioUrl;
-        streamPlayer.setGain(volume / 100.0);
+        this.volume = volume / 100f;
     }
 
     private void loadAndOpen() {
@@ -45,6 +46,8 @@ public class AudioPlayer {
                 LOGGER.severe(e.getMessage());
             }
         }).start();
+        streamPlayer.setGain(volume);
+
     }
 
 
@@ -52,10 +55,5 @@ public class AudioPlayer {
         final var url = new URL(audioUrl);
         final var inputStream = url.openStream();
         return new BufferedInputStream(inputStream);
-    }
-
-    public void run() {
-        loadAndOpen();
-        play();
     }
 }
