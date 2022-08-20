@@ -12,6 +12,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 /**
  * The settings UI.
@@ -23,14 +24,17 @@ public class SettingsComponent {
     private final JPanel panel;
     private final JBCheckBox basmalhOnStartCheckBox;
     private final JBCheckBox autoPlayBasmalhCheckBox;
-    private final JComboBox<String> basmalhPlayerIdComboBox;
+    private final JComboBox<ReadableEdition> basmalhPlayerIdComboBox;
     private final JBSlider basmalhVolumeSlider;
     private final JSpinner notificationsIntervalSpinner;
     private SpinnerNumberModel notificationsIntervalSpinnerModel;
     private final JBCheckBox notificationsAudioCheckBox;
-    private final JComboBox<String> ayahPlayerIdComboBox;
+    private final JComboBox<ReadableEdition> ayahPlayerIdComboBox;
     private final JBSlider ayahVolumeSlider;
 
+    private final Logger LOGGER = Logger.getLogger(SettingsComponent.class.getName());
+
+    // Initialize block yoo.
     {
         basmalhOnStartCheckBox = new JBCheckBox("Basmalh on start");
         autoPlayBasmalhCheckBox = new JBCheckBox("Auto play basmalh audio");
@@ -103,11 +107,11 @@ public class SettingsComponent {
         ayahVolumeSlider.setMajorTickSpacing(20);
         ayahVolumeSlider.setMinorTickSpacing(10);
 
-        if (settings.getBasmalhOnStart().getPlayerId() != null) {
-            basmalhPlayerIdComboBox.setSelectedItem(settings.getBasmalhOnStart().getPlayerId());
+        if (settings.getBasmalhOnStart().getEditionId() != null) {
+            basmalhPlayerIdComboBox.setSelectedItem(new ReadableEdition(settings.getBasmalhOnStart().getEditionId()));
         }
-        if (settings.getPlayerId() != null) {
-            ayahPlayerIdComboBox.setSelectedItem(settings.getPlayerId());
+        if (settings.getEditionId() != null) {
+            ayahPlayerIdComboBox.setSelectedItem(new ReadableEdition(settings.getEditionId()));
         }
     }
 
@@ -126,22 +130,22 @@ public class SettingsComponent {
         try {
             final var editions = Edition.getEditions(EditionFormat.AUDIO);
             for (final var edition : editions) {
-                basmalhPlayerIdComboBox.addItem(edition.getEnglishName());
-                ayahPlayerIdComboBox.addItem(edition.getEnglishName());
+                basmalhPlayerIdComboBox.addItem(new ReadableEdition(edition));
+                ayahPlayerIdComboBox.addItem(new ReadableEdition(edition));
             }
         } catch (final IOException e) {
-            e.printStackTrace();
-            basmalhPlayerIdComboBox.addItem("Error can't get editions, please check internet connection");
-            ayahPlayerIdComboBox.addItem("Error can't get editions, please check internet connection");
+            LOGGER.severe(e.getMessage());
         }
     }
 
     public boolean isModified() {
         final var settings = AyahSettingsState.getInstance();
-        return settings.getBasmalhOnStart().getPlayerId() != null &&
-                !settings.getBasmalhOnStart().getPlayerId().equals(basmalhPlayerIdComboBox.getSelectedItem()) ||
-                settings.getPlayerId() != null &&
-                        !settings.getPlayerId().equals(ayahPlayerIdComboBox.getSelectedItem()) ||
+        return settings.getBasmalhOnStart().getEditionId() != null &&
+                !settings.getBasmalhOnStart().getEditionId()
+                        .equals(((ReadableEdition) basmalhPlayerIdComboBox.getSelectedItem()).getEdition()) ||
+                settings.getEditionId() != null &&
+                        !settings.getEditionId()
+                                .equals(((ReadableEdition) ayahPlayerIdComboBox.getSelectedItem()).getEdition()) ||
                 settings.getIntervalTimeBetweenNotifications() != notificationsIntervalSpinnerModel.getNumber().intValue() ||
                 settings.getBasmalhOnStart().isActive() != basmalhOnStartCheckBox.isSelected() ||
                 settings.getBasmalhOnStart().isSoundActive() != autoPlayBasmalhCheckBox.isSelected() ||
@@ -162,7 +166,7 @@ public class SettingsComponent {
         final var b = new BasmalhOnStart();
         b.setActive(basmalhOnStartCheckBox.isSelected());
         b.setSoundActive(autoPlayBasmalhCheckBox.isSelected());
-        b.setPlayerId(Objects.requireNonNull(basmalhPlayerIdComboBox.getSelectedItem()).toString());
+        b.setEditionId(((ReadableEdition) Objects.requireNonNull(basmalhPlayerIdComboBox.getSelectedItem())).getEdition().getIdentifier());
         b.setVolume(basmalhVolumeSlider.getValue());
         return b;
     }
@@ -175,8 +179,8 @@ public class SettingsComponent {
         return notificationsAudioCheckBox.isSelected();
     }
 
-    public String getPlayerId() {
-        return Objects.requireNonNull(ayahPlayerIdComboBox.getSelectedItem()).toString();
+    public Edition getEdition() {
+        return ((ReadableEdition) ayahPlayerIdComboBox.getSelectedItem()).getEdition();
     }
 
     public int getVolume() {

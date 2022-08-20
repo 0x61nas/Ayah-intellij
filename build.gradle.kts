@@ -14,6 +14,12 @@ repositories {
 dependencies {
     implementation("com.github.anas-elgarhy:alquran-cloud-api:0.4.0-v1")
     implementation("com.miglayout:miglayout-swing:11.0")
+    implementation("com.github.goxr3plus:java-stream-player:10.0.2")
+    implementation("com.googlecode.soundlibs:jlayer:1.0.1.4")
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 // Configure Gradle IntelliJ Plugin

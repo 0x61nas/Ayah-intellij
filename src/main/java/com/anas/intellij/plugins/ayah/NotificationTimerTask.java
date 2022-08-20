@@ -28,18 +28,24 @@ public class NotificationTimerTask extends TimerTask {
     public void run() {
         final var settings = AyahSettingsState.getInstance();
 
+        LOGGER.info("Player id: " + settings.getEditionId());
         try {
-            final var randomAyah = Ayah.getRandomAyah();
+            final var randomAyah = Ayah.getRandomAyah(settings.getEditionId());
+
+            LOGGER.info("Random Ayah: " + randomAyah.getText());
+            LOGGER.info("Rsndom ayah edition: " + randomAyah.getEdition());
+            LOGGER.info("Random Ayah Url: " + randomAyah.getAudioUrl());
 
             // Set up the notification.
             final var notification = new Notification("Random Ayah Notification",
-                    randomAyah.getSurah().getName(),  randomAyah.getText(), NotificationType.INFORMATION);
+                    randomAyah.getSurah().getName(), randomAyah.getText(), NotificationType.INFORMATION);
 
             notification.addAction(new AnAction("Play") {
                 @Override
                 public void actionPerformed(@NotNull final AnActionEvent e) {
                     LOGGER.info("Play action performed");
-                    new AudioPlayer(settings.getVolume(), randomAyah.getAudioUrl()).play();
+                    LOGGER.info("Audio url: " + randomAyah.getAudioUrl());
+                    play(settings.getVolume(), randomAyah.getAudioUrl());
                 }
             });
 
@@ -65,12 +71,15 @@ public class NotificationTimerTask extends TimerTask {
             // Play sound if enabled.
             if (settings.isAutoPlayAudio()) {
                 LOGGER.info("Playing ayah");
-                new AudioPlayer(settings.getVolume(), randomAyah.getAudioUrl()).play();
+                play(settings.getVolume(), randomAyah.getAudioUrl());
             }
-
         } catch (final IOException e) {
             LOGGER.severe(e.getMessage());
         }
+    }
+
+    private void play(final int volume, final String audioUrl) {
+        new AudioPlayer(volume, audioUrl).play();
     }
 
     public void setProject(final Project project) {
