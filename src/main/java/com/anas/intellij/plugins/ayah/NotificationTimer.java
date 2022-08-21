@@ -23,12 +23,15 @@ public enum NotificationTimer {
     }
     public void start(@NotNull Project project) {
         notificationTimerTask.setProject(project);
-        timer.schedule(notificationTimerTask, 0,
-                (long) AyahSettingsState.getInstance().getIntervalTimeBetweenNotifications() * 60 * 1000);
+        schedule(AyahSettingsState.getInstance().getIntervalTimeBetweenNotifications());
     }
 
     public void updateIntervalTimeBetweenNotifications(final int intervalTimeBetweenNotifications) {
         timer.cancel();
-        timer.schedule(notificationTimerTask, 0, (long) intervalTimeBetweenNotifications * 60 * 1000);
+        schedule(intervalTimeBetweenNotifications);
+    }
+
+    private void schedule(final long intervalTimeBetweenNotifications) {
+        timer.schedule(notificationTimerTask, 1000, intervalTimeBetweenNotifications * 60 * 1000);
     }
 }
