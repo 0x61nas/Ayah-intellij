@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.anas.intellij.plugins.ayah"
-version = "0.0.2"
+version = "0.0.3"
 
 repositories {
     mavenCentral()
@@ -25,7 +25,7 @@ java {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2022.2")
+    version.set("2022.2.1")
     type.set("IC") // Target IDE Platform
     downloadSources.set(true)
 
