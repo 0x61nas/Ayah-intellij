@@ -1,7 +1,8 @@
 package com.anas.intellij.plugins.ayah.audio;
 
-import com.goxr3plus.streamplayer.stream.StreamPlayer;
-import com.goxr3plus.streamplayer.stream.StreamPlayerException;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.FactoryRegistry;
+import javazoom.jl.player.Player;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -15,39 +16,34 @@ import java.util.logging.Logger;
  * @date: 8/19/22
  */
 public class AudioPlayer {
-    private final StreamPlayer streamPlayer;
     private final String audioUrl;
-    private final float volume;
     private static final Logger LOGGER = Logger.getLogger(AudioPlayer.class.getName());
 
-    public AudioPlayer(final int volume, final String audioUrl) {
-        streamPlayer = new StreamPlayer();
+    public AudioPlayer(final String audioUrl) {
         this.audioUrl = audioUrl;
-        this.volume = volume / 100f;
     }
 
-    private void loadAndOpen() {
+    private Player loadAndOpen() {
         try {
-            streamPlayer.open(getInputStream(audioUrl));
-        } catch (final MalformedURLException | StreamPlayerException e) {
+            return new Player(getInputStream(audioUrl),
+                    FactoryRegistry.systemRegistry().createAudioDevice());
+        } catch (final MalformedURLException | JavaLayerException e) {
             LOGGER.severe("Error while opening stream player: " + e.getMessage());
         } catch (final IOException e) {
             LOGGER.severe("Can't load audio file: " + audioUrl);
             LOGGER.severe(e.getMessage());
         }
+        return null;
     }
 
     public void play() {
         new Thread(() -> {
             try {
-                loadAndOpen();
-                streamPlayer.play();
-            } catch (final StreamPlayerException e) {
+                loadAndOpen().play();
+            } catch (final JavaLayerException | NullPointerException e) {
                 LOGGER.severe(e.getMessage());
             }
         }).start();
-        streamPlayer.setGain(volume);
-
     }
 
 

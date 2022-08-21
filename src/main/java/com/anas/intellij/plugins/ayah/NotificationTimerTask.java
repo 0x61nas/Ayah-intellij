@@ -46,7 +46,7 @@ public class NotificationTimerTask extends TimerTask {
                 public void actionPerformed(@NotNull final AnActionEvent e) {
                     LOGGER.info("Play action performed");
                     LOGGER.info("Audio url: " + randomAyah.getAudioUrl());
-                    play(settings.getVolume(), randomAyah.getAudioUrl());
+                    play(randomAyah.getAudioUrl());
                 }
             });
 
@@ -73,15 +73,15 @@ public class NotificationTimerTask extends TimerTask {
             // Play sound if enabled.
             if (settings.isAutoPlayAudio()) {
                 LOGGER.info("Playing ayah");
-                play(settings.getVolume(), randomAyah.getAudioUrl());
+                play(randomAyah.getAudioUrl());
             }
         } catch (final IOException e) {
             LOGGER.severe(e.getMessage());
         }
     }
 
-    private void play(final int volume, final String audioUrl) {
-        new AudioPlayer(volume, audioUrl).play();
+    private void play(final String audioUrl) {
+        new AudioPlayer(audioUrl).play();
     }
 
     public void setProject(final Project project) {

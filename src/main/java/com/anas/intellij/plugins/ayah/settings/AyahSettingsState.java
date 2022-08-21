@@ -25,7 +25,6 @@ public class AyahSettingsState implements PersistentStateComponent<AyahSettingsS
     private int intervalTimeBetweenNotifications; // in minutes
     private boolean autoPlayAudio;
     private String editionId;
-    private int volume;
 
     public static AyahSettingsState getInstance() {
         return ApplicationManager.getApplication().getService(AyahSettingsState.class);
@@ -40,7 +39,6 @@ public class AyahSettingsState implements PersistentStateComponent<AyahSettingsS
         } catch (final IOException e) {
             editionId = null;
         }
-        volume = 40; // 40%
     }
 
 
@@ -84,13 +82,5 @@ public class AyahSettingsState implements PersistentStateComponent<AyahSettingsS
 
     public void setEditionId(final String editionId) {
         this.editionId = editionId;
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(final int volume) {
-        this.volume = volume;
     }
 }

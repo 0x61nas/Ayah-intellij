@@ -36,7 +36,7 @@ public class AyahDetailsDialog extends JDialog {
 
     private void addListeners(final Ayah ayah) {
         playButton.addActionListener(e ->
-                new AudioPlayer(AyahSettingsState.getInstance().getVolume(), ayah.getAudioUrl()).play());
+                new AudioPlayer(ayah.getAudioUrl()).play());
 
         buttonCancel.addActionListener(l -> dispose());
 

@@ -14,7 +14,6 @@ public class BasmalhOnStart {
     private boolean isNotificationActive;
     private boolean isSoundActive;
     private String editionId;
-    private int volume;
 
     public BasmalhOnStart() {
         isActive = true;
@@ -25,7 +24,6 @@ public class BasmalhOnStart {
         } catch (final IOException e) {
             editionId = null;
         }
-        volume = 40; // 40%
     }
 
     public boolean isActive() {
@@ -58,13 +56,5 @@ public class BasmalhOnStart {
 
     public void setEditionId(final String editionId) {
         this.editionId = editionId;
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(final int volume) {
-        this.volume = volume;
     }
 }

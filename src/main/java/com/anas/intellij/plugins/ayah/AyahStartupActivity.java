@@ -29,7 +29,7 @@ public class AyahStartupActivity implements StartupActivity {
                         .createNotification(bassmalh.getText(), NotificationType.INFORMATION).notify(project);
 
                 if (basmalhOnStartSettingsState.isSoundActive()) {
-                    new AudioPlayer(basmalhOnStartSettingsState.getVolume(), bassmalh.getAudioUrl()).play();
+                    new AudioPlayer(bassmalh.getAudioUrl()).play();
                 }
             } catch (final IOException e) {
                 e.printStackTrace();
