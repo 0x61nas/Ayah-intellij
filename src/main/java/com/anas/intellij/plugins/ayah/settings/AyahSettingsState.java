@@ -34,12 +34,7 @@ public class AyahSettingsState implements PersistentStateComponent<AyahSettingsS
         basmalhOnStart = new BasmalhOnStart();
         intervalTimeBetweenNotifications = 30; // 30 minutes
         autoPlayAudio = false;
-        try {
-            edition = new SelectedEdition(Edition
-                    .getEditions(EditionFormat.AUDIO)[0].getIdentifier(), 0);
-        } catch (final IOException e) {
-            edition = null;
-        }
+        edition = new SelectedEdition();
     }
 
 
