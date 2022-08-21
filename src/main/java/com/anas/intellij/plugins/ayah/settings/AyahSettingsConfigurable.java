@@ -38,7 +38,7 @@ public class AyahSettingsConfigurable implements Configurable {
         settingsState.setBasmalhOnStart(settingsComponent.getBasmalhOnStart());
         settingsState.setIntervalTimeBetweenNotifications(settingsComponent.getIntervalTimeBetweenNotifications());
         settingsState.setAutoPlayAudio(settingsComponent.isAutoPlayAudio());
-        settingsState.setEditionId(settingsComponent.getEdition().getIdentifier());
+        settingsState.setEdition(settingsComponent.getSelectedEdition());
 
         // Update the timer with the new interval time between notifications if interval time between notifications has changed
         if (settingsState.getIntervalTimeBetweenNotifications() !=

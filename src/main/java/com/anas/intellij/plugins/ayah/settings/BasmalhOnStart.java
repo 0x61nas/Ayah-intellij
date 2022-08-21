@@ -13,16 +13,17 @@ public class BasmalhOnStart {
     private boolean isActive;
     private boolean isNotificationActive;
     private boolean isSoundActive;
-    private String editionId;
+    private SelectedEdition edition;
 
     public BasmalhOnStart() {
         isActive = true;
         isNotificationActive = true;
         isSoundActive = false;
         try {
-            editionId = Edition.getRandomEdition(EditionFormat.AUDIO, "ar").getIdentifier();
+            edition = new SelectedEdition(Edition
+                    .getEditions(EditionFormat.AUDIO)[0].getIdentifier(), 0);
         } catch (final IOException e) {
-            editionId = null;
+            edition = null;
         }
     }
 
@@ -50,11 +51,11 @@ public class BasmalhOnStart {
         isSoundActive = soundActive;
     }
 
-    public String getEditionId() {
-        return editionId;
+    public SelectedEdition getEdition() {
+        return edition;
     }
 
-    public void setEditionId(final String editionId) {
-        this.editionId = editionId;
+    public void setEdition(final SelectedEdition edition) {
+        this.edition = edition;
     }
 }

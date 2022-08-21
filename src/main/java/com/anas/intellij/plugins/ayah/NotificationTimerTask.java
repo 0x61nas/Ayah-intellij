@@ -29,9 +29,9 @@ public class NotificationTimerTask extends TimerTask {
     public void run() {
         final var settings = AyahSettingsState.getInstance();
 
-        LOGGER.info("Player id: " + settings.getEditionId());
+        LOGGER.info("Player id: " + settings.getEdition());
         try {
-            final var randomAyah = Ayah.getRandomAyah(settings.getEditionId());
+            final var randomAyah = Ayah.getRandomAyah(settings.getEdition().getEditionIdentifier());
 
             LOGGER.info("Random Ayah: " + randomAyah.getText());
             LOGGER.info("Rsndom ayah edition: " + randomAyah.getEdition());

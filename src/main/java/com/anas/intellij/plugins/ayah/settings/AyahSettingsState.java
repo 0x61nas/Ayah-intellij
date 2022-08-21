@@ -24,7 +24,7 @@ public class AyahSettingsState implements PersistentStateComponent<AyahSettingsS
     private BasmalhOnStart basmalhOnStart;
     private int intervalTimeBetweenNotifications; // in minutes
     private boolean autoPlayAudio;
-    private String editionId;
+    private SelectedEdition edition;
 
     public static AyahSettingsState getInstance() {
         return ApplicationManager.getApplication().getService(AyahSettingsState.class);
@@ -35,9 +35,10 @@ public class AyahSettingsState implements PersistentStateComponent<AyahSettingsS
         intervalTimeBetweenNotifications = 30; // 30 minutes
         autoPlayAudio = false;
         try {
-            editionId = Edition.getRandomEdition(EditionFormat.AUDIO, "ar").getIdentifier();
+            edition = new SelectedEdition(Edition
+                    .getEditions(EditionFormat.AUDIO)[0].getIdentifier(), 0);
         } catch (final IOException e) {
-            editionId = null;
+            edition = null;
         }
     }
 
@@ -76,11 +77,11 @@ public class AyahSettingsState implements PersistentStateComponent<AyahSettingsS
         this.autoPlayAudio = autoPlayAudio;
     }
 
-    public String getEditionId() {
-        return editionId;
+    public SelectedEdition getEdition() {
+        return edition;
     }
 
-    public void setEditionId(final String editionId) {
-        this.editionId = editionId;
+    public void setEdition(final SelectedEdition edition) {
+        this.edition = edition;
     }
 }

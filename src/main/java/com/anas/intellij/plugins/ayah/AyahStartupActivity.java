@@ -23,7 +23,7 @@ public class AyahStartupActivity implements StartupActivity {
         if (basmalhOnStartSettingsState.isActive()) {
             try {
                 final var bassmalh = Ayah.getAyah(1,
-                        basmalhOnStartSettingsState.getEditionId());
+                        basmalhOnStartSettingsState.getEdition().getEditionIdentifier());
                 NotificationGroupManager.getInstance()
                         .getNotificationGroup("Basmalh on Start")
                         .createNotification(bassmalh.getText(), NotificationType.INFORMATION).notify(project);

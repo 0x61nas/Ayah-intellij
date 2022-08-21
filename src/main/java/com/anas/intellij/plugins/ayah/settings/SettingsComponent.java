@@ -5,7 +5,6 @@ import com.anas.alqurancloudapi.edition.Edition;
 import com.anas.alqurancloudapi.edition.EditionFormat;
 import com.intellij.ui.components.JBCheckBox;
 import com.intellij.ui.components.JBLabel;
-import com.intellij.ui.components.JBSlider;
 import com.intellij.util.ui.FormBuilder;
 import net.miginfocom.swing.MigLayout;
 
@@ -70,9 +69,9 @@ public class SettingsComponent {
                 )
                 .getPanel();
 
+        loadComboBoxesValues();
         setup();
         addListeners();
-        loadComboBoxesValues();
     }
 
     private void setup() {
@@ -87,11 +86,11 @@ public class SettingsComponent {
         notificationsAudioCheckBox.setSelected(settings.isAutoPlayAudio());
         basmalhPlayerIdComboBox.setEnabled(settings.getBasmalhOnStart().isActive());
 
-        if (settings.getBasmalhOnStart().getEditionId() != null) {
-            basmalhPlayerIdComboBox.setSelectedItem(new ReadableEdition(settings.getBasmalhOnStart().getEditionId()));
+        if (settings.getBasmalhOnStart().getEdition() != null) {
+            basmalhPlayerIdComboBox.setSelectedIndex(settings.getBasmalhOnStart().getEdition().getIndex());
         }
-        if (settings.getEditionId() != null) {
-            ayahPlayerIdComboBox.setSelectedItem(new ReadableEdition(settings.getEditionId()));
+        if (settings.getEdition() != null) {
+            ayahPlayerIdComboBox.setSelectedIndex(settings.getEdition().getIndex());
         }
     }
 
@@ -120,12 +119,14 @@ public class SettingsComponent {
 
     public boolean isModified() {
         final var settings = AyahSettingsState.getInstance();
-        return settings.getBasmalhOnStart().getEditionId() != null &&
-                !settings.getBasmalhOnStart().getEditionId()
-                        .equals(((ReadableEdition) basmalhPlayerIdComboBox.getSelectedItem()).getEdition()) ||
-                settings.getEditionId() != null &&
-                        !settings.getEditionId()
-                                .equals(((ReadableEdition) ayahPlayerIdComboBox.getSelectedItem()).getEdition()) ||
+        return settings.getBasmalhOnStart().getEdition() != null &&
+                !settings.getBasmalhOnStart().getEdition().getEditionIdentifier()
+                        .equals(((ReadableEdition) basmalhPlayerIdComboBox.getSelectedItem())
+                                .getEdition().getIdentifier()) ||
+                settings.getEdition() != null &&
+                        !settings.getEdition().getEditionIdentifier()
+                                .equals(((ReadableEdition) ayahPlayerIdComboBox.getSelectedItem())
+                                        .getEdition().getIdentifier()) ||
                 settings.getIntervalTimeBetweenNotifications() != notificationsIntervalSpinnerModel.getNumber().intValue() ||
                 settings.getBasmalhOnStart().isActive() != basmalhOnStartCheckBox.isSelected() ||
                 settings.getBasmalhOnStart().isSoundActive() != autoPlayBasmalhCheckBox.isSelected() ||
@@ -144,8 +145,9 @@ public class SettingsComponent {
         final var b = new BasmalhOnStart();
         b.setActive(basmalhOnStartCheckBox.isSelected());
         b.setSoundActive(autoPlayBasmalhCheckBox.isSelected());
-        b.setEditionId(((ReadableEdition) Objects.requireNonNull(
-                basmalhPlayerIdComboBox.getSelectedItem())).getEdition().getIdentifier());
+        b.setEdition(new SelectedEdition(((ReadableEdition) Objects.requireNonNull(
+                basmalhPlayerIdComboBox.getSelectedItem())).getEdition().getIdentifier(), basmalhPlayerIdComboBox.getSelectedIndex()));
+        b.setNotificationActive(notificationsAudioCheckBox.isSelected());
         return b;
     }
 
@@ -157,7 +159,9 @@ public class SettingsComponent {
         return notificationsAudioCheckBox.isSelected();
     }
 
-    public Edition getEdition() {
-        return ((ReadableEdition) ayahPlayerIdComboBox.getSelectedItem()).getEdition();
+    public SelectedEdition getSelectedEdition() {
+        return new SelectedEdition(((ReadableEdition) ayahPlayerIdComboBox
+                .getSelectedItem()).getEdition().getIdentifier(),
+                ayahPlayerIdComboBox.getSelectedIndex());
     }
 }
