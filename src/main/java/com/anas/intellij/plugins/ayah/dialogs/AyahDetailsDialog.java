@@ -28,7 +28,7 @@ public class AyahDetailsDialog extends JDialog {
 
         ayahTextArea.setText(ayah.getText());
         surahNameLabel.setText(ayah.getSurah().getName());
-        numberOfAyahInSuarhLabel.setText("Number: " + ayah.getNumberInSurah());
+        numberOfAyahInSuarhLabel.setText("آية رقم: " + ayah.getNumberInSurah());
         ayahRevelationType.setText(ayah.getSurah().getRevelationType().getArabicName());
 
         addListeners(ayah);
