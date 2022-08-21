@@ -86,12 +86,14 @@ public class SettingsComponent {
         notificationsAudioCheckBox.setSelected(settings.isAutoPlayAudio());
         basmalhPlayerIdComboBox.setEnabled(settings.getBasmalhOnStart().isActive());
 
-        if (settings.getBasmalhOnStart().getEdition() != null) {
-            basmalhPlayerIdComboBox.setSelectedIndex(settings.getBasmalhOnStart().getEdition().getIndex());
+        if (basmalhPlayerIdComboBox.getItemCount() <= 0) {
+            basmalhPlayerIdComboBox.addItem(new ReadableEdition(settings.getBasmalhOnStart()
+                    .getEdition().getEditionIdentifier()));
+            ayahPlayerIdComboBox.addItem(new ReadableEdition(settings.getEdition().getEditionIdentifier()));
         }
-        if (settings.getEdition() != null) {
-            ayahPlayerIdComboBox.setSelectedIndex(settings.getEdition().getIndex());
-        }
+
+        basmalhPlayerIdComboBox.setSelectedIndex(settings.getBasmalhOnStart().getEdition().getIndex());
+        ayahPlayerIdComboBox.setSelectedIndex(settings.getEdition().getIndex());
     }
 
     private void addListeners() {
@@ -147,7 +149,6 @@ public class SettingsComponent {
         b.setSoundActive(autoPlayBasmalhCheckBox.isSelected());
         b.setEdition(new SelectedEdition(((ReadableEdition) Objects.requireNonNull(
                 basmalhPlayerIdComboBox.getSelectedItem())).getEdition().getIdentifier(), basmalhPlayerIdComboBox.getSelectedIndex()));
-        b.setNotificationActive(notificationsAudioCheckBox.isSelected());
         return b;
     }
 

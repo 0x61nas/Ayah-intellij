@@ -7,7 +7,7 @@ import com.anas.alqurancloudapi.edition.Edition;
  * @date: 8/20/22
  */
 public class ReadableEdition {
-    private final Edition edition;
+    private Edition edition;
 
     public ReadableEdition(final Edition edition) {
         this.edition = edition;

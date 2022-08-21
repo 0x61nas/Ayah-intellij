@@ -11,20 +11,13 @@ import java.io.IOException;
  */
 public class BasmalhOnStart {
     private boolean isActive;
-    private boolean isNotificationActive;
     private boolean isSoundActive;
     private SelectedEdition edition;
 
     public BasmalhOnStart() {
         isActive = true;
-        isNotificationActive = true;
         isSoundActive = false;
-        try {
-            edition = new SelectedEdition(Edition
-                    .getEditions(EditionFormat.AUDIO)[0].getIdentifier(), 0);
-        } catch (final IOException e) {
-            edition = null;
-        }
+        edition = new SelectedEdition();
     }
 
     public boolean isActive() {
@@ -33,14 +26,6 @@ public class BasmalhOnStart {
 
     public void setActive(final boolean active) {
         isActive = active;
-    }
-
-    public boolean isNotificationActive() {
-        return isNotificationActive;
-    }
-
-    public void setNotificationActive(final boolean notificationActive) {
-        isNotificationActive = notificationActive;
     }
 
     public boolean isSoundActive() {
