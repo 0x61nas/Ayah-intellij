@@ -2,6 +2,7 @@ package com.anas.intellij.plugins.ayah;
 
 import com.anas.alqurancloudapi.Ayah;
 import com.anas.intellij.plugins.ayah.audio.AudioPlayer;
+import com.anas.intellij.plugins.ayah.audio.PlayerListener;
 import com.anas.intellij.plugins.ayah.dialogs.AyahDetailsDialog;
 import com.anas.intellij.plugins.ayah.settings.AyahSettingsState;
 import com.intellij.notification.Notification;
@@ -9,6 +10,7 @@ import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
+import javazoom.jl.player.advanced.PlaybackEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -21,9 +23,13 @@ import java.util.logging.Logger;
  * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
  * @date: 8/19/22
  */
-public class NotificationTimerTask extends TimerTask {
+public class NotificationTimerTask extends TimerTask implements PlayerListener {
     private Project project;
     private static final Logger LOGGER = Logger.getLogger(NotificationTimerTask.class.getName());
+    private AudioPlayer audioPlayer;
+    private boolean isPlaying;
+    private Ayah ayah;
+
 
     @Override
     public void run() {
@@ -31,31 +37,28 @@ public class NotificationTimerTask extends TimerTask {
 
         LOGGER.info("Player id: " + settings.getEdition());
         try {
-            final var randomAyah = Ayah.getRandomAyah(settings.getEdition().getEditionIdentifier());
-
-            LOGGER.info("Random Ayah: " + randomAyah.getText());
-            LOGGER.info("Rsndom ayah edition: " + randomAyah.getEdition());
-            LOGGER.info("Random Ayah Url: " + randomAyah.getAudioUrl());
+            ayah = Ayah.getRandomAyah(settings.getEdition().getEditionIdentifier());
 
             // Set up the notification.
             final var notification = new Notification("Random Ayah Notification",
-                    randomAyah.getSurah().getName(), randomAyah.getText(), NotificationType.INFORMATION);
+                    ayah.getSurah().getName(), ayah.getText(), NotificationType.INFORMATION);
 
-            notification.addAction(new AnAction("Play") {
-                @Override
-                public void actionPerformed(@NotNull final AnActionEvent e) {
-                    LOGGER.info("Play action performed");
-                    LOGGER.info("Audio url: " + randomAyah.getAudioUrl());
-                    play(randomAyah.getAudioUrl());
-                }
-            });
+            // Play sound if enabled.
+            if (settings.isAutoPlayAudio()) {
+                LOGGER.info("Playing ayah");
+                audioPlayer = new AudioPlayer(ayah.getAudioUrl()).setListener(this);
+                audioPlayer.play();
+            }
+
+            // Setup the notification actions.
+            notification.addAction(new PlayAction());
 
             notification.addAction(new AnAction("Copy") {
                 @Override
                 public void actionPerformed(@NotNull final AnActionEvent e) {
                     LOGGER.info("Copy action performed");
                     final var clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                    clipboard.setContents(new StringSelection(randomAyah.getText()), null);
+                    clipboard.setContents(new StringSelection(ayah.getText()), null);
                 }
             });
 
@@ -63,28 +66,49 @@ public class NotificationTimerTask extends TimerTask {
                 @Override
                 public void actionPerformed(@NotNull final AnActionEvent e) {
                     LOGGER.info("Details action performed");
-                    new AyahDetailsDialog(randomAyah).setVisible(true);
+                    new AyahDetailsDialog(ayah).setVisible(true);
                 }
             });
 
             // Show notification
             notification.notify(project);
-
-            // Play sound if enabled.
-            if (settings.isAutoPlayAudio()) {
-                LOGGER.info("Playing ayah");
-                play(randomAyah.getAudioUrl());
-            }
         } catch (final IOException e) {
             LOGGER.severe(e.getMessage());
         }
     }
 
-    private void play(final String audioUrl) {
-        new AudioPlayer(audioUrl).play();
-    }
-
     public void setProject(final Project project) {
         this.project = project;
+    }
+
+
+    // Play action implementation.
+    private class PlayAction extends AnAction {
+        PlayAction() {
+            super("Play", "Play the ayah", null);
+        }
+
+        @Override
+        public void actionPerformed(@NotNull final AnActionEvent e) {
+            LOGGER.info("Play action performed");
+            if (!isPlaying) {
+                audioPlayer = new AudioPlayer(ayah.getAudioUrl()).setListener(NotificationTimerTask.this);
+                audioPlayer.play();
+            } else {
+                audioPlayer.stop();
+                isPlaying = false;
+            }
+        }
+    }
+
+    // Player listener methods.
+    @Override
+    public void onStarted(final PlaybackEvent event) {
+        isPlaying = true;
+    }
+
+    @Override
+    public void onFinished(PlaybackEvent event) {
+        isPlaying = false;
     }
 }
