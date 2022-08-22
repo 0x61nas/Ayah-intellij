@@ -104,7 +104,7 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
     }
 
     private void close() {
-        if (isPlaying) {
+        if (audioPlayer != null) {
             audioPlayer.stop();
             audioPlayer = null;
         }
