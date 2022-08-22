@@ -1,9 +1,7 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
+name: Publish the plugin in marketplace
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
   release:
     types:
@@ -11,7 +9,6 @@ on:
 jobs:
   deploying:
     runs-on: ubuntu-latest
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
