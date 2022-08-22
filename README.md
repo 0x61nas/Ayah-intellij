@@ -14,4 +14,4 @@
 
 ![notification](./screenshots/notification_0.0.1.png)
 ![settings](./screenshots/settings_0.0.3.png)
-![ayah details](./screenshots/ayah-details_0.0.1.png)
+![ayah details](./screenshots/ayah-details_0.0.5.png)
