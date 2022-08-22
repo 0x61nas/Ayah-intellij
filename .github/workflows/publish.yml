@@ -6,10 +6,8 @@ name: Manual workflow
 # or API.
 on:
   release:
-    branches:
-      - master
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+    types:
+      - published # when a release is published
 jobs:
   deploying:
     runs-on: ubuntu-latest
