@@ -9,3 +9,12 @@
 
 ![normal icon](./icon.svg)
 ![transparent icon](./icon-trans.svg)
+- Font:
+  - family: Arima Madurai Extra Bold
+  - size: 108px
+
+![normal arabic icon](./icon-arabic.svg)
+![transparent arabic icon](./icon-arabic-trans.svg)
+- Font:
+  - family: 29LT Zawi ExtraBold
+  - size: 108px
