@@ -3,6 +3,8 @@
 	<!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
 	<id>com.anas.intellij.plugins.ayah</id>
 
+	<depends>com.intellij.modules.platform</depends>
+
 	<!-- Public plugin name should be written in Title Case.
 		 Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
 	<name>Ayah</name>
@@ -39,6 +41,11 @@
 		 Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
 	<depends>com.intellij.modules.platform</depends>
 
+	<applicationListeners>
+		<listener class="com.anas.intellij.plugins.ayah.listeners.AyahExecutionListener"
+		          topic="com.intellij.execution.ExecutionListener" />
+	</applicationListeners>
+	
 	<!-- Extension points defined by the plugin.
 		 Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
 	<extensions defaultExtensionNs="com.intellij">

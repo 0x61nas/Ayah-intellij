@@ -1,8 +1,11 @@
-package com.anas.intellij.plugins.ayah.settings;
+package com.anas.intellij.plugins.ayah.settings.userinterface;
 
 
 import com.anas.alqurancloudapi.edition.Edition;
 import com.anas.alqurancloudapi.edition.EditionFormat;
+import com.anas.intellij.plugins.ayah.settings.AyahSettingsState;
+import com.anas.intellij.plugins.ayah.settings.BasmalhOnStart;
+import com.anas.intellij.plugins.ayah.settings.SelectedEdition;
 import com.intellij.ui.components.JBCheckBox;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.util.ui.FormBuilder;

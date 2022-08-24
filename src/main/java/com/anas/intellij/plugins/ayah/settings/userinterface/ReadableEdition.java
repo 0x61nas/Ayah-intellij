@@ -1,4 +1,4 @@
-package com.anas.intellij.plugins.ayah.settings;
+package com.anas.intellij.plugins.ayah.settings.userinterface;
 
 import com.anas.alqurancloudapi.edition.Edition;
 
