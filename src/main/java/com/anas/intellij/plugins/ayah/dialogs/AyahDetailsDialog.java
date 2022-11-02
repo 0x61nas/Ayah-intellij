@@ -12,6 +12,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+/**
+ * @author <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
+ * @since 8/19/22
+ */
+
 public class AyahDetailsDialog extends JDialog implements PlayerListener {
     private JPanel contentPane;
     private JButton playButton;
@@ -138,13 +143,13 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
     }
 
     @Override
-    public void onStarted(final PlaybackEvent event) {
+    public void onStarted() {
         playButton.setText("Stop");
         isPlaying = true;
     }
 
     @Override
-    public void onFinished(final PlaybackEvent event) {
+    public void onFinished() {
         if (autoPlayCheckBox.isSelected() && ayah.getNumber() <= Constants.AYAHS_COUNT) {
             if (loadTheAyah(ayah.getNumber() + 1)) {
                 audioPlayer = new AudioPlayer(ayah.getAudioUrl()).setListener(this);

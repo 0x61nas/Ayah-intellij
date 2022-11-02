@@ -9,8 +9,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 /**
- * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
- * @date: 8/19/22
+ * @author <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
+ * @since 8/19/22
  */
 public class AyahSettingsConfigurable implements Configurable {
 

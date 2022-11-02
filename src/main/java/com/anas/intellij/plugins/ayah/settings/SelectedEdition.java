@@ -9,8 +9,8 @@ import lombok.Setter;
 import java.io.IOException;
 
 /**
- * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
- * @date: 8/21/22
+ * @author <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
+ * @since 8/21/22
  */
 @AllArgsConstructor
 @Getter

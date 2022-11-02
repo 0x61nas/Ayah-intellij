@@ -19,8 +19,8 @@ import java.util.logging.Logger;
 /**
  * The settings UI.
  *
- * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
- * @date: 8/19/22
+ * @author <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
+ * @since 8/19/22
  */
 public class SettingsComponent {
     private final JPanel panel;

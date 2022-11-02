@@ -7,8 +7,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Timer;
 
 /**
- * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
- * @date: 8/19/22
+ * @author <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
+ * @since 8/19/22
  */
 public enum NotificationTimer {
     INSTANCE

@@ -20,8 +20,8 @@ import java.util.TimerTask;
 import java.util.logging.Logger;
 
 /**
- * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
- * @date: 8/19/22
+ * @author <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
+ * @since 8/19/22
  */
 public class NotificationTimerTask extends TimerTask implements PlayerListener {
     private Project project;
@@ -103,12 +103,12 @@ public class NotificationTimerTask extends TimerTask implements PlayerListener {
 
     // Player listener methods.
     @Override
-    public void onStarted(final PlaybackEvent event) {
+    public void onStarted() {
         isPlaying = true;
     }
 
     @Override
-    public void onFinished(PlaybackEvent event) {
+    public void onFinished() {
         isPlaying = false;
     }
 }

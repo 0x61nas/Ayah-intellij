@@ -12,8 +12,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
 /**
- * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
- * @date: 8/18/22
+ * @author <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
+ * @since 8/18/22
  */
 public class AyahStartupActivity implements StartupActivity {
     @Override

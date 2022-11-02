@@ -15,8 +15,8 @@ import java.net.URL;
 import java.util.logging.Logger;
 
 /**
- * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
- * @date: 8/19/22
+ * @author <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
+ * @since 8/19/22
  */
 public class AudioPlayer {
     private final String audioUrl;
@@ -56,12 +56,12 @@ public class AudioPlayer {
                     player.setPlayBackListener(new PlaybackListener() {
                         @Override
                         public void playbackStarted(final PlaybackEvent evt) {
-                            listener.onStarted(evt);
+                            listener.onStarted();
                         }
 
                         @Override
                         public void playbackFinished(final PlaybackEvent evt) {
-                            listener.onFinished(evt);
+                            listener.onFinished();
                         }
                     });
                 }
