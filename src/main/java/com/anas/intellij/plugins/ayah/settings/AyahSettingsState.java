@@ -7,15 +7,18 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 
 /**
- * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
- * @date: 8/19/22
+ * @author <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
+ * @since 8/19/22
  */
+@Getter
+@Setter
 @State(
         name = "com.anas.intellij.plugins.ayah.settings.AyahSettingsState",
         storages = @Storage("ayah.xml")
@@ -46,37 +49,5 @@ public class AyahSettingsState implements PersistentStateComponent<AyahSettingsS
     @Override
     public void loadState(@NotNull final AyahSettingsState state) {
         XmlSerializerUtil.copyBean(state, this);
-    }
-
-    public BasmalhOnStart getBasmalhOnStart() {
-        return basmalhOnStart;
-    }
-
-    public void setBasmalhOnStart(final BasmalhOnStart basmalhOnStart) {
-        this.basmalhOnStart = basmalhOnStart;
-    }
-
-    public int getIntervalTimeBetweenNotifications() {
-        return intervalTimeBetweenNotifications;
-    }
-
-    public void setIntervalTimeBetweenNotifications(final int intervalTimeBetweenNotifications) {
-        this.intervalTimeBetweenNotifications = intervalTimeBetweenNotifications;
-    }
-
-    public boolean isAutoPlayAudio() {
-        return autoPlayAudio;
-    }
-
-    public void setAutoPlayAudio(final boolean autoPlayAudio) {
-        this.autoPlayAudio = autoPlayAudio;
-    }
-
-    public SelectedEdition getEdition() {
-        return edition;
-    }
-
-    public void setEdition(final SelectedEdition edition) {
-        this.edition = edition;
     }
 }

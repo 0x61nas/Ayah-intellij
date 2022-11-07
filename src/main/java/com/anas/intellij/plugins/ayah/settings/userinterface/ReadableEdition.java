@@ -1,24 +1,20 @@
-package com.anas.intellij.plugins.ayah.settings;
+package com.anas.intellij.plugins.ayah.settings.userinterface;
 
 import com.anas.alqurancloudapi.edition.Edition;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
- * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
- * @date: 8/20/22
+ * @author <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
+ * @since 8/20/22
  */
+@RequiredArgsConstructor
+@Getter
 public class ReadableEdition {
-    private Edition edition;
-
-    public ReadableEdition(final Edition edition) {
-        this.edition = edition;
-    }
+    private final Edition edition;
 
     public ReadableEdition(final String identifier) {
         this.edition = new Edition(identifier);
-    }
-
-    public Edition getEdition() {
-        return edition;
     }
 
     @Override

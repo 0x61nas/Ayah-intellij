@@ -1,6 +1,7 @@
 package com.anas.intellij.plugins.ayah.settings;
 
 import com.anas.intellij.plugins.ayah.NotificationTimer;
+import com.anas.intellij.plugins.ayah.settings.userinterface.SettingsComponent;
 import com.intellij.openapi.options.Configurable;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
@@ -8,8 +9,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 /**
- * @author: <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
- * @date: 8/19/22
+ * @author <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
+ * @since 8/19/22
  */
 public class AyahSettingsConfigurable implements Configurable {
 

@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.8.0"
+    id("org.jetbrains.intellij") version "1.9.0"
 }
 
 group = "com.anas.intellij.plugins.ayah"
@@ -12,10 +12,16 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.anas-elgarhy:alquran-cloud-api:0.4.0-v1")
+    implementation("com.github.anas-elgarhy:alquran-cloud-api:0.4.0-v1") // TODO: fix this
     implementation("com.miglayout:miglayout-swing:11.0")
     // implementation("com.github.goxr3plus:java-stream-player:10.0.2")
     implementation("com.googlecode.soundlibs:jlayer:1.0.1.4")
+
+    compileOnly("org.projectlombok:lombok:1.18.24")
+    annotationProcessor("org.projectlombok:lombok:1.18.24")
+
+    testImplementation("org.projectlombok:lombok:1.18.24")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -42,7 +48,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("213")
-        untilBuild.set("222.*")
+        untilBuild.set("223.*")
     }
 
     signPlugin {
