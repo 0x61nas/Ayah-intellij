@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.10.0-SNAPSHOT"
+    id("org.jetbrains.intellij") version "1.11.0"
 }
 
 group = "com.anas.intellij.plugins.ayah"
