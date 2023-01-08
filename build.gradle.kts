@@ -1,10 +1,10 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.9.0"
+    id("org.jetbrains.intellij") version "1.10.0-SNAPSHOT"
 }
 
 group = "com.anas.intellij.plugins.ayah"
-version = "0.0.8"
+version = "0.0.9"
 
 repositories {
     mavenCentral()
@@ -24,14 +24,14 @@ dependencies {
     testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
 }
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2022.2.1")
+    version.set("LATEST-EAP-SNAPSHOT")
     type.set("IC") // Target IDE Platform
     downloadSources.set(true)
 
@@ -42,12 +42,12 @@ tasks {
     // Set the JVM compatibility versions
     withType<JavaCompile> {
         options.encoding = "UTF-8"
-        sourceCompatibility = "11"
-        targetCompatibility = "11"
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
     }
 
     patchPluginXml {
-        sinceBuild.set("213")
+        sinceBuild.set("223")
         untilBuild.set("223.*")
     }
 
