@@ -1,6 +1,8 @@
 package com.anas.intellij.plugins.ayah;
 
 import com.anas.alqurancloudapi.Ayah;
+import com.anas.alqurancloudapi.edition.Edition;
+import com.anas.alqurancloudapi.edition.EditionFormat;
 import com.anas.intellij.plugins.ayah.audio.AudioPlayer;
 import com.anas.intellij.plugins.ayah.audio.PlayerListener;
 import com.anas.intellij.plugins.ayah.dialogs.AyahDetailsDialog;
@@ -29,6 +31,8 @@ public class NotificationTimerTask extends TimerTask implements PlayerListener {
     private AudioPlayer audioPlayer;
     private boolean isPlaying;
     private Ayah ayah;
+    private Ayah currentAyah; // current ayah
+    private AudioPlayer player;
 
 
     @Override
@@ -69,6 +73,12 @@ public class NotificationTimerTask extends TimerTask implements PlayerListener {
                     new AyahDetailsDialog(ayah).setVisible(true);
                 }
             });
+            notification.addAction(new AnAction("PlayMode") {
+                @Override
+                public void actionPerformed(@NotNull AnActionEvent e) {
+                    playMode();
+                }
+            });
 
             // Show notification
             notification.notify(project);
@@ -76,6 +86,7 @@ public class NotificationTimerTask extends TimerTask implements PlayerListener {
             LOGGER.severe(e.getMessage());
         }
     }
+
 
     public void setProject(final Project project) {
         this.project = project;
@@ -100,6 +111,16 @@ public class NotificationTimerTask extends TimerTask implements PlayerListener {
             }
         }
     }
+    public void playMode(){
+        try{
+            final var currentEdition= Edition.getEditions(EditionFormat.AUDIO,"ar",null);
+            currentAyah=Ayah.getAyah(1,currentEdition[0]);
+            player=new AudioPlayer(currentAyah.getAudioUrl()).setListener(this);
+            player.play();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Player listener methods.
     @Override
@@ -110,5 +131,14 @@ public class NotificationTimerTask extends TimerTask implements PlayerListener {
     @Override
     public void onFinished() {
         isPlaying = false;
+        new Thread(() -> {
+            try {
+                currentAyah = Ayah.getAyah(currentAyah.getNumber() + 1, currentAyah.getEdition());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+        player = new AudioPlayer(currentAyah.getAudioUrl()).setListener(this);
+        player.play();
     }
 }
