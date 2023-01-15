@@ -1,3 +1,4 @@
+<!-- Plugin description -->
 <p align="center">
     <img width="200" src="./assets/icon.svg"  alt="ayah icon"/>
 </p>
@@ -11,7 +12,10 @@
 - Read the ayah in different languages and different voices.
 - Show the ayah details if you want.
 - Very Customizable
+<!-- Plugin description end -->
 
 ![notification](./screenshots/notification_0.0.1.png)
 ![settings](./screenshots/settings_0.0.3.png)
 ![ayah details](./screenshots/ayah-details_0.0.7.png)
+
+<p>Inspired by Ayat on vscode by Hussam Adil.</p>
