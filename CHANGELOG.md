@@ -5,6 +5,7 @@
 ## [1.0.0] - 2023-01-15
 * Support the build 2022.3.
 * Fix some bugs.
+* Upgrade the dependencies.
 
 ## [0.0.9] - 2022-11-03 (pre release)
 * Early support for build 2022.3
