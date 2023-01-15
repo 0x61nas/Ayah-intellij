@@ -26,10 +26,10 @@ jobs:
     steps:
 
       - name: Fetch Sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Gradle Wrapper Validation
-        uses: gradle/wrapper-validation-action@v1.0.3
+        uses: gradle/wrapper-validation-action@v1.0.5
 
   # Run verifyPlugin and test Gradle tasks
   test:
@@ -39,22 +39,22 @@ jobs:
     steps:
 
       - name: Setup Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: 11
           distribution: 'zulu'
           
       - name: Fetch Sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Gradle Dependencies Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v3.2.3
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
 
       - name: Setup Gradle Wrapper Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v3.2.3
         with:
           path: ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
@@ -78,22 +78,22 @@ jobs:
     steps:
 
       - name: Setup Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: 11
           distribution: 'zulu'
 
       - name: Fetch Sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Gradle Dependencies Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v3.2.3
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
 
       - name: Setup Gradle Wrapper Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v3.2.3
         with:
           path: ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
@@ -116,7 +116,7 @@ jobs:
 
       # Upload plugin artifact to make it available in the next jobs
       - name: Upload artifact
-        uses: actions/upload-artifact@v2.2.3
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: plugin-artifact
           path: ./build/distributions/${{ needs.build.outputs.artifact }}
@@ -130,22 +130,22 @@ jobs:
     steps:
 
       - name: Setup Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: 11
           distribution: 'zulu'
 
       - name: Fetch Sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Gradle Dependencies Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v3.2.3
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
 
       - name: Setup Gradle Wrapper Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v3.2.3
         with:
           path: ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
@@ -163,7 +163,7 @@ jobs:
 
       # Cache Plugin Verifier IDEs
       - name: Setup Plugin Verifier IDEs Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v3.2.3
         with:
           path: ${{ steps.properties.outputs.pluginVerifierHomeDir }}/ides
           key: ${{ runner.os }}-plugin-verifier-${{ steps.properties.outputs.ideVersions }}
