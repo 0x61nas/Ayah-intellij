@@ -20,3 +20,6 @@
 
 ## [0.0.6] - 2022-08-22
 * update the icons.
+
+## [0.0.5] - 2022-08-22
+* Improve details dialog design.
