@@ -16,4 +16,7 @@
 
 ## [0.0.7] - 2022-08-22
 * improve the play action.
-* Add next and previous buttons and auto play check box.
+* Add next and previous buttons and autoplay check box.
+
+## [0.0.6] - 2022-08-22
+* update the icons.
