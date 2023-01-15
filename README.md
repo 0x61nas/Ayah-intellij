@@ -14,8 +14,8 @@
 - Very Customizable
 <!-- Plugin description end -->
 
-![notification](./screenshots/notification_0.0.1.png)
-![settings](./screenshots/settings_0.0.3.png)
-![ayah details](./screenshots/ayah-details_0.0.7.png)
+![notification](./screenshots/notification_1.0.0.png)
+![ayah details](./screenshots/ayah-details_1.0.0.png)
+![settings](./screenshots/settings_1.0.0.png)
 
 <p>Inspired by Ayat on vscode by Hussam Adil.</p>
