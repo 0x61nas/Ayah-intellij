@@ -12,31 +12,6 @@
 	<!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
 	<vendor email="anas.elgarhy.dev@gmail.com" url="https://github.com/anas-elgarhy">Anas Elgarhy</vendor>
 
-	<!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
-		 Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
-		 Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
-	<description><![CDATA[
-	<img width="200" src="https://raw.githubusercontent.com/anas-elgarhy/Ayah-intellij/master/assets/icon-trans.png" alt="ayah icon" />
-	<p> Get a verse(an ayah) from the Quran during your coding session 💻 stay connected with the words of Allah. 🤍 </p>
-    <p align="center"> وَلا تَكُونُوا كَالَّذِينَ نَسُوا اللَّهَ فَأَنْسَاهُمْ أَنْفُسَهُمْ أُولَئِكَ هُمُ الْفَاسِقُونَ </p>
-    <h3>Features</h3>
-    <ul>
-		<li>Get a verse from the Quran during your coding session</li>
-		<li>Stay connected with the words of Allah</li>
-		<li>Get the basmlah after open project</li>
-		<li>Copy the ayah to clipboard.</li>
-		<li>Read the ayah in different languages and different voices.</li>
-		<li>Show the ayah details if you want.</li>
-		<li>Very Customizable</li>
-		<li>Very Easy to use</li>
-	</ul>
-	<img src="https://raw.githubusercontent.com/anas-elgarhy/Ayah-intellij/master/screenshots/notification_0.0.1.png" alt="notification" />
-	<img src="https://raw.githubusercontent.com/anas-elgarhy/Ayah-intellij/master/screenshots/ayah-details_0.0.7.png" alt="ayah details" />
-	<img src="https://raw.githubusercontent.com/anas-elgarhy/Ayah-intellij/master/screenshots/settings_0.0.3.png" alt="settings" />
-
-	<p>Inspired by Ayat on vscode by Hussam Adil.</p>
-  ]]></description>
-
 	<!-- Product and plugin compatibility requirements.
 		 Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
 	<depends>com.intellij.modules.platform</depends>
