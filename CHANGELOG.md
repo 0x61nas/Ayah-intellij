@@ -30,3 +30,6 @@
 ## [0.0.3] - 2022-08-21
 * Fix sound issue.
 * Support intellij API level 213 and above.
+
+## [0.0.2] - 2022-08-20
+* First stable release.
