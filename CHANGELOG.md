@@ -26,3 +26,7 @@
 
 ## [0.0.4] - 2022-08-21
 * Fix forget selected edition id issue after closing the IDE and open it again.
+
+## [0.0.3] - 2022-08-21
+* Fix sound issue.
+* Support intellij API level 213 and above.
