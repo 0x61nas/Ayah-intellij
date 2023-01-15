@@ -23,3 +23,6 @@
 
 ## [0.0.5] - 2022-08-22
 * Improve details dialog design.
+
+## [0.0.4] - 2022-08-21
+* Fix forget selected edition id issue after closing the IDE and open it again.
