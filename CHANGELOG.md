@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-## [1.0.0] - 2023-01-08
+## [1.0.0] - 2023-01-15
 * Support the build 2022.3.
 * Fix some bugs.
 
