@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
     implementation("com.github.anas-elgarhy:alquran-cloud-api:v0.4.2-v1")
-    implementation("com.miglayout:miglayout-swing:11.0")
+    implementation("com.miglayout:miglayout-swing:11.1")
     // implementation("com.github.goxr3plus:java-stream-player:10.0.2")
     implementation("com.googlecode.soundlibs:jlayer:1.0.1.4")
 
