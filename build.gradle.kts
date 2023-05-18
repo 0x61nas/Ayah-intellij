@@ -71,7 +71,9 @@ tasks {
                     throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
                 }
                 subList(indexOf(start) + 1, indexOf(end))
-            }.joinToString("\n").let { markdownToHTML(it) }
+            }.joinToString("\n")
+                .replace("./assets/", "https://raw.githubusercontent.com/anas-elgarhy/Ayah-intellij/master/assets/")
+                .let { markdownToHTML(it) }
         )
 
         // Get the latest available change notes from the changelog file
@@ -86,7 +88,7 @@ tasks {
     }
 
     publishPlugin {
-        dependsOn("patchChangelog")
+        dependsOn("patchChangelog", "patchPluginXml")
         token.set(System.getenv("PUBLISH_TOKEN"))
         // pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
