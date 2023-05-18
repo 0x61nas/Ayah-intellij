@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [1.0.1] - 2023-05-18
+* Update the dependencies.
+* Fix the icon url in the plugin.xml file.
+
 ## [1.0.0] - 2023-01-15
 * Support the build 2022.3.
 * Fix some bugs.
