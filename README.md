@@ -3,9 +3,9 @@
     <img width="200" src="./assets/icon.svg"  alt="ayah icon"/>
 </p>
 
-### Get a verse(an ayah) from the Quran during your coding session 💻 stay connected with the words of Allah. 🤍
+## Get a verse(an ayah) from the Quran during your coding session 💻 stay connected with the words of Allah. 🤍
 
-### Features
+## Features
 - Get a verse from the Quran during your coding session 
 - Get the basmlah after open project
 - Copy the ayah to clipboard.
@@ -14,6 +14,7 @@
 - Very Customizable
 <!-- Plugin description end -->
 
+## Screenshots
 ![notification](./screenshots/notification_1.0.0.png)
 ![ayah details](./screenshots/ayah-details_1.0.0.png)
 ![settings](./screenshots/settings_1.0.0.png)
