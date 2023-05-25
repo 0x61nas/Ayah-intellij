@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+* Add the tafseer/translation text box to the ayah details dialog and make the user able to change the player edition on the fly
 
 ### Changed
 
