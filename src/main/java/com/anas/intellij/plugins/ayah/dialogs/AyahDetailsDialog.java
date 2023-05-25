@@ -82,10 +82,10 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
         // Set the default selected item for the editionComboBox
         editionComboBoxModel.setSelectedItem(new ReadableEdition(ayah.getEdition()));
         // Set the actual information about the ayah in the UI
-        updateAhaDetails();
+        updateAyahDetails();
     }
 
-    private void updateAhaDetails() {
+    private void updateAyahDetails() {
         // Update the ayah details
         ayahTextArea.setText(ayah.getText());
         surahNameLabel.setText(ayah.getSurah().getName());
@@ -142,7 +142,7 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
                     editionComboBox.getSelectedItem())).getEdition();
             try {
                 ayah = Ayah.getAyah(ayah.getNumber(), selectedEdition);
-                updateAhaDetails();
+                updateAyahDetails();
             } catch (final IOException ioException) {
                 ioException.printStackTrace();
                 JOptionPane.showMessageDialog(this,
@@ -204,7 +204,7 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
         try {
             ayah = Ayah.getAyah(ayhNumber,
                     ayah.getEdition().getIdentifier());
-            updateAhaDetails();
+            updateAyahDetails();
             return true;
         } catch (final IOException ex) {
             JOptionPane.showMessageDialog(this,
