@@ -45,8 +45,8 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
 
         setContentPane(contentPane);
         setModal(true);
-        setSize(500, 300);
-//        setResizable(false);
+        setSize(520, 320);
+        setResizable(false);
         setLocationRelativeTo(null);
         getRootPane().setDefaultButton(playButton);
 
