@@ -2,9 +2,8 @@ package com.anas.intellij.plugins.ayah.dialogs;
 
 import com.anas.alqurancloudapi.Ayah;
 import com.anas.alqurancloudapi.consts.Constants;
-import com.anas.alqurancloudapi.consts.Surahs;
 import com.anas.alqurancloudapi.edition.Edition;
-import com.anas.alqurancloudapi.edition.EditionType;
+import com.anas.alqurancloudapi.edition.EditionFormat;
 import com.anas.intellij.plugins.ayah.audio.AudioPlayer;
 import com.anas.intellij.plugins.ayah.audio.PlayerListener;
 import com.anas.intellij.plugins.ayah.settings.userinterface.ReadableEdition;
@@ -70,10 +69,10 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
         final var editionComboBoxModel = new DefaultComboBoxModel<ReadableEdition>();
 
         Arrays.stream(Edition.getEditions()).forEach(edition -> {
-            if (edition.getType() == EditionType.TAFSIR || edition.getType() == EditionType.TRANSLATION) {
-                tafserAndTranslationComboBoxModel.addElement(new ReadableEdition(edition));
-            } else {
+            if (edition.getFormat() == EditionFormat.AUDIO) {
                 editionComboBoxModel.addElement(new ReadableEdition(edition));
+            } else {
+                tafserAndTranslationComboBoxModel.addElement(new ReadableEdition(edition));
             }
         });
 
