@@ -32,8 +32,8 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
     private JButton previousButton;
     private JButton nextButton;
     private JCheckBox autoPlayCheckBox;
-    private JTextArea tafserTextArea;
-    private JComboBox<ReadableEdition> tafserAndTranslationComboBox;
+    private JTextArea tafseerTextArea;
+    private JComboBox<ReadableEdition> tafseerAndTranslationComboBox;
     private JComboBox<ReadableEdition> editionComboBox;
     private boolean isPlaying;
     private AudioPlayer audioPlayer;
@@ -76,7 +76,7 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
             }
         });
 
-        tafserAndTranslationComboBox.setModel(tafserAndTranslationComboBoxModel);
+        tafseerAndTranslationComboBox.setModel(tafserAndTranslationComboBoxModel);
         editionComboBox.setModel(editionComboBoxModel);
 
         // Set the default selected item for the editionComboBox
@@ -91,8 +91,8 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
         surahNameLabel.setText(ayah.getSurah().getName());
         numberOfAyahInSuarhLabel.setText("آية رقم: " + ayah.getNumberInSurah());
         ayahRevelationType.setText(ayah.getSurah().getRevelationType().getArabicName());
-        // Update the tafser or translation
-        updateTheTauserTextArea();
+        // Update the tafseer or translation
+        updateTheTauseerTextArea();
     }
 
     private void addListeners() {
@@ -133,8 +133,8 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
             }
         });
 
-        tafserAndTranslationComboBox.addActionListener(e -> {
-            updateTheTauserTextArea();
+        tafseerAndTranslationComboBox.addActionListener(e -> {
+            updateTheTauseerTextArea();
         });
 
         editionComboBox.addActionListener(e -> {
@@ -167,15 +167,15 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
                 JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void updateTheTauserTextArea() {
+    private void updateTheTauseerTextArea() {
         final var selectedEdition = ((ReadableEdition) Objects.requireNonNull(
-                tafserAndTranslationComboBox.getSelectedItem())).getEdition();
+                tafseerAndTranslationComboBox.getSelectedItem())).getEdition();
         try {
-            tafserTextArea.setText(Ayah.getAyah(ayah.getNumber(), selectedEdition).getText());
+            tafseerTextArea.setText(Ayah.getAyah(ayah.getNumber(), selectedEdition).getText());
         } catch (final IOException ioException) {
             ioException.printStackTrace();
             JOptionPane.showMessageDialog(this,
-                    "Error while loading the tafser - check your internet connection",
+                    "Error while loading the tafseer - check your internet connection",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
