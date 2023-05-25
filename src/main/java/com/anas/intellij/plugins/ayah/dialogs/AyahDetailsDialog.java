@@ -4,7 +4,6 @@ import com.anas.alqurancloudapi.Ayah;
 import com.anas.alqurancloudapi.consts.Constants;
 import com.anas.intellij.plugins.ayah.audio.AudioPlayer;
 import com.anas.intellij.plugins.ayah.audio.PlayerListener;
-import javazoom.jl.player.advanced.PlaybackEvent;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -28,6 +27,9 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
     private JButton previousButton;
     private JButton nextButton;
     private JCheckBox autoPlayCheckBox;
+    private JTextArea tafserTextArea;
+    private JComboBox comboBox1;
+    private JComboBox comboBox2;
     private boolean isPlaying;
     private AudioPlayer audioPlayer;
     private Ayah ayah;
