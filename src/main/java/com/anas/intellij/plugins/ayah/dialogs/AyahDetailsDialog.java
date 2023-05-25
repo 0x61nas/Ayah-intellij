@@ -62,7 +62,6 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
     }
 
     private void setupTheUI() throws IOException {
-        updateAhaDetails();
         previousButton.setEnabled(ayah.getNumber() != 1 && ayah.getSurah().getNumber() != 1);
         nextButton.setEnabled(ayah.getNumber() != Constants.AYAHS_COUNT && ayah.getSurah().getNumber() != Constants.SURAS_COUNT);
 
@@ -83,6 +82,8 @@ public class AyahDetailsDialog extends JDialog implements PlayerListener {
 
         // Set the default selected item for the editionComboBox
         editionComboBoxModel.setSelectedItem(new ReadableEdition(ayah.getEdition()));
+        // Set the actual information about the ayah in the UI
+        updateAhaDetails();
     }
 
     private void updateAhaDetails() {
