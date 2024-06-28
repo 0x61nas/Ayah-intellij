@@ -23,11 +23,11 @@ dependencies {
     // implementation("com.github.goxr3plus:java-stream-player:10.0.2")
     implementation("com.googlecode.soundlibs:jlayer:1.0.1.4")
 
-    compileOnly("org.projectlombok:lombok:1.18.30")
-    annotationProcessor("org.projectlombok:lombok:1.18.30")
+    compileOnly("org.projectlombok:lombok:1.18.34")
+    annotationProcessor("org.projectlombok:lombok:1.18.34")
 
-    testImplementation("org.projectlombok:lombok:1.18.30")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.30")
+    testImplementation("org.projectlombok:lombok:1.18.34")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_17
