@@ -1,30 +1,14 @@
-# GitHub Actions Workflow created for testing and preparing the plugin release in following steps:
-# - validate Gradle Wrapper,
-# - run test and verifyPlugin tasks,
-# - run buildPlugin task and prepare artifact for the further tests,
-# - run IntelliJ Plugin Verifier,
-# - create a draft release.
-#
-# Workflow is triggered on push and pull_request events.
-#
-# Docs:
-# - GitHub Actions: https://help.github.com/en/actions
-# - IntelliJ Plugin Verifier GitHub Action: https://github.com/ChrisCarini/intellij-platform-plugin-verifier-action
-#
-
 name: Build
 on:
   pull_request:
     branches:
       - master
 jobs:
-
   # Run Gradle Wrapper Validation Action to verify the wrapper's checksum
   gradleValidation:
     name: Gradle Wrapper
     runs-on: ubuntu-latest
     steps:
-
       - name: Fetch Sources
         uses: actions/checkout@v6
 
@@ -41,7 +25,7 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
-          java-version: 11
+          java-version: 21
           distribution: 'zulu'
           
       - name: Fetch Sources
@@ -76,11 +60,10 @@ jobs:
       version: ${{ steps.properties.outputs.version }}
       artifact: ${{ steps.properties.outputs.artifact }}
     steps:
-
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
-          java-version: 11
+          java-version: 21
           distribution: 'zulu'
 
       - name: Fetch Sources
@@ -128,11 +111,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
-          java-version: 11
+          java-version: 21
           distribution: 'zulu'
 
       - name: Fetch Sources
