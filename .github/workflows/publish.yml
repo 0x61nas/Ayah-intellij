@@ -1,16 +1,28 @@
-# This is a basic workflow that is manually triggered
-
-name: Publish the plugin in marketplace
+name: Publish the plugin on marketplace
 
 on:
-  release:
-    types:
-      - published # when a release is published
+  workflow_dispatch:
+  push:
+    tags:
+      - "*.*.*"
+
 jobs:
-  deploying:
+  publish:
     runs-on: ubuntu-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Runs a single command using the runners shell
-    - name: Deploying a Plugin with Gradle
-      run: ./gradlew publishPlugin -Dorg.gradle.project.intellijPublishToken=${{ secrets.PUBLISH_TOKEN }}
+      - name: Fetch Sources
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'zulu'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Deploying a Plugin with Gradle
+        run: ./gradlew publishPlugin
+        env:
+          PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
