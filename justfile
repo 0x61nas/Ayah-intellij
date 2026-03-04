@@ -3,12 +3,17 @@
 REPO_NAME := "Ayah-intellij"
 
 alias dist := package
+alias ch := patch-changelog
 
 package:
     cd {{justfile_directory()}} && ./gradlew buildPlugin
 
 clean:
     cd {{justfile_directory()}} && ./gradlew clean
+
+# Update the CHANGELOG.md
+patch-changelog:
+    cd {{justfile_directory()}} && ./gradlew patchChangelog
 
 setup-remotes:
     git remote add github git@github.com:0x61nas/{{REPO_NAME}}.git
