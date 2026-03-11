@@ -27,11 +27,11 @@ dependencies {
     // implementation("com.github.goxr3plus:java-stream-player:10.0.2")
     implementation("com.googlecode.soundlibs:jlayer:1.0.1.4")
 
-    compileOnly("org.projectlombok:lombok:1.18.42")
-    annotationProcessor("org.projectlombok:lombok:1.18.42")
+    compileOnly("org.projectlombok:lombok:1.18.44")
+    annotationProcessor("org.projectlombok:lombok:1.18.44")
 
-    testImplementation("org.projectlombok:lombok:1.18.42")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.42")
+    testImplementation("org.projectlombok:lombok:1.18.44")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.44")
 
     intellijPlatform {
     intellijIdea("2025.3.3")
