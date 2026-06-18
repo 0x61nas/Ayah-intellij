@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch Sources
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Gradle Wrapper Validation
         uses: gradle/actions/wrapper-validation@v6
@@ -29,7 +29,7 @@ jobs:
           distribution: 'zulu'
           
       - name: Fetch Sources
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup Gradle Dependencies Cache
         uses: actions/cache@v5.0.5
@@ -67,7 +67,7 @@ jobs:
           distribution: 'zulu'
 
       - name: Fetch Sources
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup Gradle Dependencies Cache
         uses: actions/cache@v5.0.5
@@ -118,7 +118,7 @@ jobs:
           distribution: 'zulu'
 
       - name: Fetch Sources
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup Gradle Dependencies Cache
         uses: actions/cache@v5.0.5
