@@ -23,7 +23,7 @@ jobs:
     steps:
 
       - name: Setup Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           java-version: 21
           distribution: 'zulu'
@@ -61,7 +61,7 @@ jobs:
       artifact: ${{ steps.properties.outputs.artifact }}
     steps:
       - name: Setup Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           java-version: 21
           distribution: 'zulu'
@@ -112,7 +112,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           java-version: 21
           distribution: 'zulu'
